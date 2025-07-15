@@ -1,29 +1,28 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SistemaFIME</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SistemaFIME.styles.css" asp-append-version="true" />
+    <base href="~/" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="SistemaFIME.styles.css" rel="stylesheet" />
 </head>
 <body>
-    @await Html.PartialAsync("Shared/Layout/Header/Header")
-    
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    @RenderBody()
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            Ha ocurrido un error. Esta aplicación puede no responder hasta que se recargue.
+        </environment>
+        <environment include="Development">
+            Ha ocurrido una excepción no controlada. Consulte los registros del navegador para obtener más detalles.
+        </environment>
+        <a href="" class="reload">Recargar</a>
+        <a class="dismiss">🗙</a>
     </div>
 
-    @await Html.PartialAsync("Layout/Footer/Footer")
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="_framework/blazor.server.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

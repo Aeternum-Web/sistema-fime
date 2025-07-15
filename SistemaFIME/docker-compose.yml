@@ -1,0 +1,45 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15
+    container_name: sistemafime_postgres
+    environment:
+      POSTGRES_DB: sistemafime_db
+      POSTGRES_USER: sistemafime_user
+      POSTGRES_PASSWORD: sistemafime_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - sistemafime_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sistemafime_user -d sistemafime_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # Aplicación ASP.NET Core
+  web:
+    build: .
+    container_name: sistemafime_web
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=sistemafime_db;Username=sistemafime_user;Password=sistemafime_password
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - sistemafime_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  sistemafime_network:
+    driver: bridge

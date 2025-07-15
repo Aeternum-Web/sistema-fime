@@ -1,0 +1,61 @@
+@page "/fetchdata"
+@using SistemaFIME.Data
+@inject ApplicationDbContext DbContext
+
+<PageTitle>Datos de la Base</PageTitle>
+
+<h1>Conexión a PostgreSQL</h1>
+
+<p>Esta página demuestra la conexión con PostgreSQL.</p>
+
+@if (isConnected == null)
+{
+    <p><em>Verificando conexión...</em></p>
+}
+else if (isConnected == true)
+{
+    <div class="alert alert-success">
+        <strong>✅ Conexión exitosa!</strong> La base de datos PostgreSQL está funcionando correctamente.
+        <br />
+        <small>Hora de conexión: @connectionTime</small>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>❌ Error de conexión</strong> No se pudo conectar a PostgreSQL.
+        <br />
+        <small>Error: @errorMessage</small>
+    </div>
+}
+
+<button class="btn btn-primary" @onclick="TestConnection">Probar Conexión</button>
+
+@code {
+    private bool? isConnected = null;
+    private string? errorMessage;
+    private DateTime? connectionTime;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await TestConnection();
+    }
+
+    private async Task TestConnection()
+    {
+        try
+        {
+            isConnected = await DbContext.Database.CanConnectAsync();
+            if (isConnected == true)
+            {
+                connectionTime = DateTime.Now;
+                errorMessage = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            isConnected = false;
+            errorMessage = ex.Message;
+        }
+    }
+}
