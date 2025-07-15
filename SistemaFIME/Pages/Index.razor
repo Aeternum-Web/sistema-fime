@@ -2,66 +2,40 @@
 
 <PageTitle>Inicio - SistemaFIME</PageTitle>
 
-<div class="home-page">
-    <div class="hero-section">
-        <div class="hero-content">
-            <h1 class="hero-title">¡Bienvenido a SistemaFIME!</h1>
-            <p class="hero-subtitle">
-                Sistema de gestión moderno desarrollado con Blazor Server y PostgreSQL
-            </p>
-            <div class="hero-actions">
-                <a href="/dashboard" class="btn btn-primary">
-                    📊 Ver Dashboard
-                </a>
-                <a href="/fetchdata" class="btn btn-secondary">
-                    🗄️ Probar Base de Datos
-                </a>
-            </div>
+<div style="max-width: 1000px; margin: 0 auto;">
+    <!-- Hero Section -->
+    <div style="text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); border-radius: 8px; color: white; margin-bottom: 3rem;">
+        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">¡Bienvenido a SistemaFIME!</h1>
+        <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Sistema de gestión moderno desarrollado con Blazor Server y PostgreSQL
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/dashboard" class="btn btn-primary" style="text-decoration: none;">
+                📊 Ver Dashboard
+            </a>
+            <a href="/fetchdata" class="btn btn-secondary" style="text-decoration: none;">
+                🗄️ Probar Base de Datos
+            </a>
         </div>
     </div>
     
-    <div class="features-section">
-        <h2 class="section-title">Características Principales</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Blazor Server</h3>
-                <p>Interfaz de usuario interactiva con C# en tiempo real</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🗄️</div>
-                <h3>PostgreSQL</h3>
-                <p>Base de datos robusta y escalable para tus datos</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>CSS Vanilla</h3>
-                <p>Diseño limpio sin dependencias externas</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🐳</div>
-                <h3>Docker</h3>
-                <p>Despliegue fácil y consistente en cualquier entorno</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Responsive</h3>
-                <p>Funciona perfectamente en dispositivos móviles</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Seguro</h3>
-                <p>Implementa las mejores prácticas de seguridad</p>
-            </div>
+    <!-- Features Section -->
+    <div style="margin-bottom: 3rem;">
+        <h2 style="text-align: center; font-size: 2rem; color: #212529; margin-bottom: 2rem;">Características Principales</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+            @foreach (var feature in features)
+            {
+                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.2s;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">@feature.Icon</div>
+                    <h3 style="font-size: 1.25rem; color: #212529; margin-bottom: 0.5rem;">@feature.Title</h3>
+                    <p style="color: #6c757d; line-height: 1.6;">@feature.Description</p>
+                </div>
+            }
         </div>
     </div>
     
-    <div class="info-section">
+    <!-- Info Section -->
+    <div style="margin-bottom: 3rem;">
         <div class="alert alert-info">
             <strong>💡 ¿Cómo funciona?</strong>
             <p>
@@ -72,164 +46,56 @@
         </div>
     </div>
     
-    <div class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">@DateTime.Now.Year</div>
-                <div class="stat-label">Año actual</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">@connectionTime.ToString("HH:mm")</div>
-                <div class="stat-label">Hora del servidor</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">v1.0</div>
-                <div class="stat-label">Versión</div>
-            </div>
+    <!-- Stats Section -->
+    <div style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center;">
+            @foreach (var stat in stats)
+            {
+                <div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #007bff; margin-bottom: 0.5rem;">@stat.Value</div>
+                    <div style="color: #6c757d; font-size: 0.875rem;">@stat.Label</div>
+                </div>
+            }
         </div>
     </div>
 </div>
 
-<style>
-    .home-page {
-        max-width: 1000px;
-        margin: 0 auto;
-    }
-    
-    .hero-section {
-        text-align: center;
-        padding: 3rem 0;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-        border-radius: var(--border-radius);
-        color: var(--white);
-        margin-bottom: 3rem;
-    }
-    
-    .hero-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-    }
-    
-    .hero-subtitle {
-        font-size: 1.2rem;
-        opacity: 0.9;
-        margin-bottom: 2rem;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .hero-actions {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .section-title {
-        text-align: center;
-        font-size: 2rem;
-        color: var(--gray-900);
-        margin-bottom: 2rem;
-    }
-    
-    .features-section {
-        margin-bottom: 3rem;
-    }
-    
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-    }
-    
-    .feature-card {
-        background: var(--white);
-        padding: 2rem;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-md);
-        text-align: center;
-        transition: var(--transition);
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
-    }
-    
-    .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-    
-    .feature-card h3 {
-        font-size: 1.25rem;
-        color: var(--gray-900);
-        margin-bottom: 0.5rem;
-    }
-    
-    .feature-card p {
-        color: var(--gray-600);
-        line-height: 1.6;
-    }
-    
-    .info-section {
-        margin-bottom: 3rem;
-    }
-    
-    .stats-section {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        padding: 2rem;
-        box-shadow: var(--shadow-md);
-    }
-    
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 2rem;
-        text-align: center;
-    }
-    
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        color: var(--primary-color);
-        margin-bottom: 0.5rem;
-    }
-    
-    .stat-label {
-        color: var(--gray-600);
-        font-size: 0.875rem;
-    }
-    
-    @@media (max-width: 768px) {
-        .hero-title {
-            font-size: 2rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1rem;
-        }
-        
-        .features-grid {
-            grid-template-columns: 1fr;
-        }
-        
-        .hero-actions {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
-</style>
-
 @code {
     private DateTime connectionTime = DateTime.Now;
+
+    private List<FeatureItem> features = new()
+    {
+        new FeatureItem { Icon = "⚡", Title = "Blazor Server", Description = "Interfaz de usuario interactiva con C# en tiempo real" },
+        new FeatureItem { Icon = "🗄️", Title = "PostgreSQL", Description = "Base de datos robusta y escalable para tus datos" },
+        new FeatureItem { Icon = "🎨", Title = "CSS Vanilla", Description = "Diseño limpio sin dependencias externas" },
+        new FeatureItem { Icon = "🐳", Title = "Docker", Description = "Despliegue fácil y consistente en cualquier entorno" },
+        new FeatureItem { Icon = "📱", Title = "Responsive", Description = "Funciona perfectamente en dispositivos móviles" },
+        new FeatureItem { Icon = "🔒", Title = "Seguro", Description = "Implementa las mejores prácticas de seguridad" }
+    };
+
+    private List<StatItem> stats = new();
 
     protected override void OnInitialized()
     {
         connectionTime = DateTime.Now;
+        stats = new List<StatItem>
+        {
+            new StatItem { Value = DateTime.Now.Year.ToString(), Label = "Año actual" },
+            new StatItem { Value = connectionTime.ToString("HH:mm"), Label = "Hora del servidor" },
+            new StatItem { Value = "v1.0", Label = "Versión" }
+        };
+    }
+
+    public class FeatureItem
+    {
+        public string Icon { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Description { get; set; } = "";
+    }
+
+    public class StatItem
+    {
+        public string Value { get; set; } = "";
+        public string Label { get; set; } = "";
     }
 }
