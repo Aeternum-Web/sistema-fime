@@ -1,17 +1,29 @@
 @inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">Acerca de</a>
-        </div>
-
-        <article class="content px-4">
+<div class="app-layout">
+    <Header OnMenuToggle="ToggleNavbar" />
+    
+    <Navbar IsOpen="isNavbarOpen" OnClose="CloseNavbar" />
+    
+    <main class="main-content @(isNavbarOpen ? "content-shifted" : "")">
+        <div class="content-wrapper">
             @Body
-        </article>
+        </div>
     </main>
+    
+    <Footer />
 </div>
+
+@code {
+    private bool isNavbarOpen = false;
+
+    private void ToggleNavbar()
+    {
+        isNavbarOpen = !isNavbarOpen;
+    }
+
+    private void CloseNavbar()
+    {
+        isNavbarOpen = false;
+    }
+}

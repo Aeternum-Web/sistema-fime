@@ -1,0 +1,77 @@
+<nav class="navbar @(IsOpen ? "navbar-open" : "")">
+    <div class="navbar-overlay @(IsOpen ? "overlay-active" : "")" @onclick="CloseMenu"></div>
+    
+    <div class="navbar-content">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <span class="brand-icon">🏢</span>
+                <span class="brand-text">SistemaFIME</span>
+            </div>
+            <button class="navbar-close" @onclick="CloseMenu" title="Cerrar menú">
+                ✕
+            </button>
+        </div>
+        
+        <div class="navbar-menu">
+            <div class="menu-section">
+                <h3 class="menu-title">Principal</h3>
+                <NavLink class="menu-item" href="" Match="NavLinkMatch.All" @onclick="CloseMenu">
+                    <span class="menu-icon">🏠</span>
+                    <span class="menu-text">Inicio</span>
+                </NavLink>
+                <NavLink class="menu-item" href="dashboard" @onclick="CloseMenu">
+                    <span class="menu-icon">📊</span>
+                    <span class="menu-text">Dashboard</span>
+                </NavLink>
+            </div>
+            
+            <div class="menu-section">
+                <h3 class="menu-title">Gestión</h3>
+                <NavLink class="menu-item" href="usuarios" @onclick="CloseMenu">
+                    <span class="menu-icon">👥</span>
+                    <span class="menu-text">Usuarios</span>
+                </NavLink>
+                <NavLink class="menu-item" href="productos" @onclick="CloseMenu">
+                    <span class="menu-icon">📦</span>
+                    <span class="menu-text">Productos</span>
+                </NavLink>
+                <NavLink class="menu-item" href="reportes" @onclick="CloseMenu">
+                    <span class="menu-icon">📈</span>
+                    <span class="menu-text">Reportes</span>
+                </NavLink>
+            </div>
+            
+            <div class="menu-section">
+                <h3 class="menu-title">Herramientas</h3>
+                <NavLink class="menu-item" href="counter" @onclick="CloseMenu">
+                    <span class="menu-icon">🔢</span>
+                    <span class="menu-text">Contador</span>
+                </NavLink>
+                <NavLink class="menu-item" href="fetchdata" @onclick="CloseMenu">
+                    <span class="menu-icon">🗄️</span>
+                    <span class="menu-text">Base de Datos</span>
+                </NavLink>
+            </div>
+        </div>
+        
+        <div class="navbar-footer">
+            <div class="user-info">
+                <div class="user-avatar">👤</div>
+                <div class="user-details">
+                    <span class="user-name">Usuario</span>
+                    <span class="user-role">Administrador</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async Task CloseMenu()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

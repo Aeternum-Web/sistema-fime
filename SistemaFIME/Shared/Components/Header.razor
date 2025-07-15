@@ -1,0 +1,32 @@
+<header class="header">
+    <div class="header-container">
+        <button class="menu-toggle" @onclick="ToggleMenu" title="Abrir menú">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
+        
+        <div class="header-brand">
+            <h1>SistemaFIME</h1>
+            <span class="header-subtitle">Sistema de Gestión</span>
+        </div>
+        
+        <div class="header-actions">
+            <button class="btn-icon" title="Notificaciones">
+                🔔
+            </button>
+            <button class="btn-icon" title="Perfil">
+                👤
+            </button>
+        </div>
+    </div>
+</header>
+
+@code {
+    [Parameter] public EventCallback OnMenuToggle { get; set; }
+
+    private async Task ToggleMenu()
+    {
+        await OnMenuToggle.InvokeAsync();
+    }
+}

@@ -1,18 +1,235 @@
 @page "/"
 
-<PageTitle>Inicio</PageTitle>
+<PageTitle>Inicio - SistemaFIME</PageTitle>
 
-<h1>¡Hola, mundo!</h1>
-
-Bienvenido a tu nueva aplicación SistemaFIME con Blazor Server.
-
-<div class="alert alert-secondary mt-4">
-    <span class="oi oi-pencil me-2" aria-hidden="true"></span>
-    <strong>¿Cómo funciona esto?</strong>
-
-    <p>
-        Esta aplicación está construida con <strong>Blazor Server</strong> y <strong>PostgreSQL</strong>.
-        Blazor Server ejecuta el código C# en el servidor y actualiza la interfaz de usuario 
-        a través de una conexión SignalR en tiempo real.
-    </p>
+<div class="home-page">
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">¡Bienvenido a SistemaFIME!</h1>
+            <p class="hero-subtitle">
+                Sistema de gestión moderno desarrollado con Blazor Server y PostgreSQL
+            </p>
+            <div class="hero-actions">
+                <a href="/dashboard" class="btn btn-primary">
+                    📊 Ver Dashboard
+                </a>
+                <a href="/fetchdata" class="btn btn-secondary">
+                    🗄️ Probar Base de Datos
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="features-section">
+        <h2 class="section-title">Características Principales</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Blazor Server</h3>
+                <p>Interfaz de usuario interactiva con C# en tiempo real</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🗄️</div>
+                <h3>PostgreSQL</h3>
+                <p>Base de datos robusta y escalable para tus datos</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>CSS Vanilla</h3>
+                <p>Diseño limpio sin dependencias externas</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🐳</div>
+                <h3>Docker</h3>
+                <p>Despliegue fácil y consistente en cualquier entorno</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Responsive</h3>
+                <p>Funciona perfectamente en dispositivos móviles</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Seguro</h3>
+                <p>Implementa las mejores prácticas de seguridad</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-section">
+        <div class="alert alert-info">
+            <strong>💡 ¿Cómo funciona?</strong>
+            <p>
+                Esta aplicación utiliza <strong>Blazor Server</strong> para ejecutar código C# en el servidor
+                y actualizar la interfaz de usuario a través de una conexión SignalR en tiempo real.
+                Los datos se almacenan en <strong>PostgreSQL</strong> y todo se ejecuta en contenedores Docker.
+            </p>
+        </div>
+    </div>
+    
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">@DateTime.Now.Year</div>
+                <div class="stat-label">Año actual</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">@connectionTime.ToString("HH:mm")</div>
+                <div class="stat-label">Hora del servidor</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">v1.0</div>
+                <div class="stat-label">Versión</div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .home-page {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .hero-section {
+        text-align: center;
+        padding: 3rem 0;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        border-radius: var(--border-radius);
+        color: var(--white);
+        margin-bottom: 3rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hero-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+        color: var(--gray-900);
+        margin-bottom: 2rem;
+    }
+    
+    .features-section {
+        margin-bottom: 3rem;
+    }
+    
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .feature-card {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow-md);
+        text-align: center;
+        transition: var(--transition);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.25rem;
+        color: var(--gray-900);
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-card p {
+        color: var(--gray-600);
+        line-height: 1.6;
+    }
+    
+    .info-section {
+        margin-bottom: 3rem;
+    }
+    
+    .stats-section {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+        color: var(--gray-600);
+        font-size: 0.875rem;
+    }
+    
+    @@media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .hero-actions {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+@code {
+    private DateTime connectionTime = DateTime.Now;
+
+    protected override void OnInitialized()
+    {
+        connectionTime = DateTime.Now;
+    }
+}

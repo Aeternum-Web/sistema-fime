@@ -1,0 +1,189 @@
+@page "/dashboard"
+
+<PageTitle>Dashboard - SistemaFIME</PageTitle>
+
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>Dashboard</h1>
+        <p>Resumen general del sistema</p>
+    </div>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <div class="card-icon">👥</div>
+            <div class="card-content">
+                <h3>Usuarios</h3>
+                <p class="card-number">@usuariosCount</p>
+                <span class="card-label">Total registrados</span>
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-icon">📦</div>
+            <div class="card-content">
+                <h3>Productos</h3>
+                <p class="card-number">@productosCount</p>
+                <span class="card-label">En inventario</span>
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-icon">📈</div>
+            <div class="card-content">
+                <h3>Ventas</h3>
+                <p class="card-number">@ventasCount</p>
+                <span class="card-label">Este mes</span>
+            </div>
+        </div>
+        
+        <div class="dashboard-card">
+            <div class="card-icon">💰</div>
+            <div class="card-content">
+                <h3>Ingresos</h3>
+                <p class="card-number">$@ingresos.ToString("N0")</p>
+                <span class="card-label">Total mensual</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dashboard-actions">
+        <button class="btn btn-primary" @onclick="RefreshData">
+            🔄 Actualizar Datos
+        </button>
+        <button class="btn btn-secondary" @onclick="ExportData">
+            📊 Exportar Reporte
+        </button>
+    </div>
+    
+    <div class="dashboard-info">
+        <div class="alert alert-info">
+            <strong>ℹ️ Información:</strong> Los datos se actualizan automáticamente cada 5 minutos.
+            Última actualización: @ultimaActualizacion.ToString("dd/MM/yyyy HH:mm:ss")
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+    
+    .dashboard-header {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 2rem;
+        color: var(--gray-900);
+        margin-bottom: 0.5rem;
+    }
+    
+    .dashboard-header p {
+        color: var(--gray-600);
+        font-size: 1.1rem;
+    }
+    
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .dashboard-card {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow-md);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: var(--transition);
+    }
+    
+    .dashboard-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .card-icon {
+        font-size: 2.5rem;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--gray-100);
+        border-radius: 50%;
+    }
+    
+    .card-content h3 {
+        font-size: 1rem;
+        color: var(--gray-600);
+        margin-bottom: 0.5rem;
+    }
+    
+    .card-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin: 0;
+    }
+    
+    .card-label {
+        font-size: 0.875rem;
+        color: var(--gray-500);
+    }
+    
+    .dashboard-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    
+    .dashboard-info {
+        margin-top: 2rem;
+    }
+</style>
+
+@code {
+    private int usuariosCount = 0;
+    private int productosCount = 0;
+    private int ventasCount = 0;
+    private decimal ingresos = 0;
+    private DateTime ultimaActualizacion = DateTime.Now;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboardData();
+    }
+
+    private async Task LoadDashboardData()
+    {
+        // Simular carga de datos
+        await Task.Delay(500);
+        
+        var random = new Random();
+        usuariosCount = random.Next(50, 200);
+        productosCount = random.Next(100, 500);
+        ventasCount = random.Next(20, 100);
+        ingresos = random.Next(10000, 50000);
+        ultimaActualizacion = DateTime.Now;
+    }
+
+    private async Task RefreshData()
+    {
+        await LoadDashboardData();
+        StateHasChanged();
+    }
+
+    private async Task ExportData()
+    {
+        // Simular exportación
+        await Task.Delay(1000);
+        // Aquí iría la lógica de exportación
+    }
+}
