@@ -1,4 +1,76 @@
-# SistemaFIME
+# SistemaFIME - Comunidad Docente FIME
+
+Sistema web para la comunidad docente de la Facultad de Ingeniería Mecánica y Eléctrica.
+
+## 🚀 Desarrollo Rápido (Hot Reload)
+
+Para desarrollo con recarga automática de cambios:
+
+```bash
+./start-dev.sh
+```
+
+Esto iniciará el proyecto en modo desarrollo donde:
+- ✅ Los cambios en archivos `.razor`, `.cshtml`, `.cs` se ven instantáneamente
+- ✅ No necesitas reconstruir el contenedor
+- ✅ Hot reload automático habilitado
+- ✅ Base de datos PostgreSQL incluida
+
+## 🏭 Producción
+
+Para ejecutar en modo producción:
+
+```bash
+docker-compose up -d --build
+```
+
+## 📋 Requisitos
+
+- Docker
+- Docker Compose
+
+## 🌐 Acceso
+
+- **Aplicación**: http://localhost:8080
+- **Base de datos**: localhost:5432
+
+## 🛠️ Comandos Útiles
+
+### Desarrollo
+```bash
+# Iniciar desarrollo con hot reload
+./start-dev.sh
+
+# Detener contenedores de desarrollo
+docker-compose -f docker-compose.dev.yml down
+
+# Ver logs en tiempo real
+docker-compose -f docker-compose.dev.yml logs -f web
+```
+
+### Producción
+```bash
+# Iniciar producción
+docker-compose up -d --build
+
+# Detener producción
+docker-compose down
+
+# Ver logs
+docker-compose logs -f web
+```
+
+## 📁 Estructura del Proyecto
+
+- `Pages/` - Páginas Razor y componentes Blazor
+- `Data/` - Contexto de base de datos y modelos
+- `wwwroot/` - Archivos estáticos (CSS, JS, imágenes)
+- `docker-compose.yml` - Configuración de producción
+- `docker-compose.dev.yml` - Configuración de desarrollo
+- `Dockerfile` - Imagen de producción
+- `Dockerfile.dev` - Imagen de desarrollo con hot reload
+
+## SistemaFIME
 
 Sistema web desarrollado en **Blazor Server** con ASP.NET Core 9.0 y PostgreSQL.
 

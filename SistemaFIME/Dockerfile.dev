@@ -1,0 +1,23 @@
+# Dockerfile para desarrollo con hot reload
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+WORKDIR /app
+
+# Instalar dotnet-ef para migraciones
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Copiar archivos del proyecto y restaurar dependencias
+COPY *.csproj ./
+RUN dotnet restore
+
+# Exponer el puerto
+EXPOSE 8080
+
+# Configurar variables de entorno para desarrollo
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV DOTNET_WATCH_RESTART_ON_RUDE_EDIT=true
+
+# Comando para ejecutar con hot reload
+CMD ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:8080"]
