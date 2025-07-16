@@ -2,58 +2,63 @@
 
 <PageTitle>Inicio - SistemaFIME</PageTitle>
 
-<div style="max-width: 1000px; margin: 0 auto;">
+<div class="max-w-6xl mx-auto px-4 py-8">
     <!-- Hero Section -->
-    <div style="text-align: center; padding: 3rem 1rem; background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); border-radius: 8px; color: white; margin-bottom: 3rem;">
-        <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">¡Bienvenido a SistemaFIME!</h1>
-        <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+    <div class="text-center p-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl text-white mb-12 shadow-xl">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">¡Bienvenido a SistemaFIME!</h1>
+        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto leading-relaxed">
             Sistema de gestión moderno desarrollado con Blazor Server y PostgreSQL
         </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/dashboard" class="btn btn-primary" style="text-decoration: none;">
+        <div class="flex gap-4 justify-center flex-wrap">
+            <a href="/dashboard" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 no-underline shadow-lg">
                 📊 Ver Dashboard
             </a>
-            <a href="/fetchdata" class="btn btn-secondary" style="text-decoration: none;">
+            <a href="/fetchdata" class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors duration-200 no-underline shadow-lg">
                 🗄️ Probar Base de Datos
             </a>
         </div>
     </div>
     
     <!-- Features Section -->
-    <div style="margin-bottom: 3rem;">
-        <h2 style="text-align: center; font-size: 2rem; color: #212529; margin-bottom: 2rem;">Características Principales</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+    <div class="mb-12">
+        <h2 class="text-center text-3xl font-bold text-gray-800 mb-8">Características Principales</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             @foreach (var feature in features)
             {
-                <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center; transition: transform 0.2s;">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">@feature.Icon</div>
-                    <h3 style="font-size: 1.25rem; color: #212529; margin-bottom: 0.5rem;">@feature.Title</h3>
-                    <p style="color: #6c757d; line-height: 1.6;">@feature.Description</p>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+                    <div class="text-5xl mb-4">@feature.Icon</div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">@feature.Title</h3>
+                    <p class="text-gray-600 leading-relaxed">@feature.Description</p>
                 </div>
             }
         </div>
     </div>
     
     <!-- Info Section -->
-    <div style="margin-bottom: 3rem;">
-        <div class="alert alert-info">
-            <strong>💡 ¿Cómo funciona?</strong>
-            <p>
-                Esta aplicación utiliza <strong>Blazor Server</strong> para ejecutar código C# en el servidor
-                y actualizar la interfaz de usuario a través de una conexión SignalR en tiempo real.
-                Los datos se almacenan en <strong>PostgreSQL</strong> y todo se ejecuta en contenedores Docker.
-            </p>
+    <div class="mb-12">
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg shadow-md">
+            <div class="flex items-start">
+                <div class="text-2xl mr-3">💡</div>
+                <div>
+                    <h3 class="text-lg font-semibold text-blue-800 mb-2">¿Cómo funciona?</h3>
+                    <p class="text-blue-700 leading-relaxed">
+                        Esta aplicación utiliza <span class="font-semibold">Blazor Server</span> para ejecutar código C# en el servidor
+                        y actualizar la interfaz de usuario a través de una conexión SignalR en tiempo real.
+                        Los datos se almacenan en <span class="font-semibold">PostgreSQL</span> y todo se ejecuta en contenedores Docker.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
     
     <!-- Stats Section -->
-    <div style="background: white; border-radius: 8px; padding: 2rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center;">
+    <div class="bg-white rounded-xl p-8 shadow-lg">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             @foreach (var stat in stats)
             {
-                <div>
-                    <div style="font-size: 2rem; font-weight: 700; color: #007bff; margin-bottom: 0.5rem;">@stat.Value</div>
-                    <div style="color: #6c757d; font-size: 0.875rem;">@stat.Label</div>
+                <div class="group">
+                    <div class="text-3xl font-bold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-200">@stat.Value</div>
+                    <div class="text-gray-500 text-sm font-medium uppercase tracking-wide">@stat.Label</div>
                 </div>
             }
         </div>

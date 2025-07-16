@@ -1,0 +1,12 @@
+{
+  "name": "sistemafime",
+  "version": "1.0.0",
+  "description": "Sistema FIME with Tailwind CSS",
+  "scripts": {
+    "build-css": "tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/tailwind.css --watch",
+    "build-css-prod": "tailwindcss -i ./wwwroot/css/input.css -o ./wwwroot/css/tailwind.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

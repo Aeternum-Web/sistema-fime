@@ -1,72 +1,74 @@
 @namespace SistemaFIME.Pages.Shared.Components
 
-<nav class="navbar @(IsOpen ? "navbar-open" : "")">
-    <div class="navbar-overlay @(IsOpen ? "overlay-active" : "")" @onclick="CloseMenu"></div>
+<div class="fixed inset-0 z-40 flex transform transition-transform duration-300 ease-in-out @(IsOpen ? "translate-x-0" : "-translate-x-full")">
+    <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity @(IsOpen ? "opacity-100" : "opacity-0")" @onclick="CloseMenu"></div>
     
-    <div class="navbar-content">
-        <div class="navbar-header">
-            <div class="navbar-brand">
-                <span class="brand-icon">🏢</span>
-                <span class="brand-text">SistemaFIME</span>
+    <div class="relative flex flex-col w-64 max-w-sm bg-white dark:bg-gray-800 h-full shadow-xl">
+        <div class="flex items-center justify-between p-4 border-b dark:border-gray-700">
+            <div class="flex items-center space-x-2">
+                <i class="bi bi-building text-xl"></i>
+                <span class="font-semibold text-gray-800 dark:text-white">SistemaFIME</span>
             </div>
-            <button class="navbar-close" @onclick="CloseMenu" title="Cerrar menú">
-                ✕
+            <button class="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700" @onclick="CloseMenu" title="Cerrar menú">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </button>
         </div>
         
-        <div class="navbar-menu">
-            <div class="menu-section">
-                <h3 class="menu-title">Principal</h3>
-                <NavLink class="menu-item" href="" Match="NavLinkMatch.All" @onclick="CloseMenu">
-                    <span class="menu-icon">🏠</span>
-                    <span class="menu-text">Inicio</span>
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Principal</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="" Match="NavLinkMatch.All" @onclick="CloseMenu">
+                    <i class="bi bi-house-door mr-3"></i>
+                    <span>Inicio</span>
                 </NavLink>
-                <NavLink class="menu-item" href="dashboard" @onclick="CloseMenu">
-                    <span class="menu-icon">📊</span>
-                    <span class="menu-text">Dashboard</span>
-                </NavLink>
-            </div>
-            
-            <div class="menu-section">
-                <h3 class="menu-title">Gestión</h3>
-                <NavLink class="menu-item" href="usuarios" @onclick="CloseMenu">
-                    <span class="menu-icon">👥</span>
-                    <span class="menu-text">Usuarios</span>
-                </NavLink>
-                <NavLink class="menu-item" href="productos" @onclick="CloseMenu">
-                    <span class="menu-icon">📦</span>
-                    <span class="menu-text">Productos</span>
-                </NavLink>
-                <NavLink class="menu-item" href="reportes" @onclick="CloseMenu">
-                    <span class="menu-icon">📈</span>
-                    <span class="menu-text">Reportes</span>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="dashboard" @onclick="CloseMenu">
+                    <i class="bi bi-graph-up mr-3"></i>
+                    <span>Dashboard</span>
                 </NavLink>
             </div>
             
-            <div class="menu-section">
-                <h3 class="menu-title">Herramientas</h3>
-                <NavLink class="menu-item" href="counter" @onclick="CloseMenu">
-                    <span class="menu-icon">🔢</span>
-                    <span class="menu-text">Contador</span>
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Gestión</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="usuarios" @onclick="CloseMenu">
+                    <i class="bi bi-people mr-3"></i>
+                    <span>Usuarios</span>
                 </NavLink>
-                <NavLink class="menu-item" href="fetchdata" @onclick="CloseMenu">
-                    <span class="menu-icon">🗄️</span>
-                    <span class="menu-text">Base de Datos</span>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="productos" @onclick="CloseMenu">
+                    <i class="bi bi-box mr-3"></i>
+                    <span>Productos</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="reportes" @onclick="CloseMenu">
+                    <i class="bi bi-bar-chart mr-3"></i>
+                    <span>Reportes</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Herramientas</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="counter" @onclick="CloseMenu">
+                    <i class="bi bi-123 mr-3"></i>
+                    <span>Contador</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="fetchdata" @onclick="CloseMenu">
+                    <i class="bi bi-database mr-3"></i>
+                    <span>Base de Datos</span>
                 </NavLink>
             </div>
         </div>
         
-        <div class="navbar-footer">
-            <div class="user-info">
-                <div class="user-avatar">👤</div>
-                <div class="user-details">
-                    <span class="user-name">Usuario</span>
-                    <span class="user-role">Administrador</span>
-                </div>
+        <div class="border-t dark:border-gray-700 p-4">
+            <div class="flex items-center">
+                <div class="flex-shrink-0 mr-3"><i class="bi bi-person"></i></div>
+                <div>
+                    <div class="font-medium text-gray-800 dark:text-white">Usuario</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Administrador</div>
             </div>
         </div>
     </div>
-</nav>
+    </div>
+</div>
 
 @code {
     [Parameter] public bool IsOpen { get; set; }
