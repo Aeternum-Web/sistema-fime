@@ -1,0 +1,24 @@
+@using System.Collections.Generic
+@* Sección de estadísticas reutilizable *@
+@code {
+    [Parameter] public List<StatItem> Stats { get; set; }
+    public class StatItem
+    {
+        public string Value { get; set; } = "";
+        public string Label { get; set; } = "";
+    }
+}
+<div class="card border-0 shadow-sm p-4">
+    <div class="row text-center">
+        @if (Stats != null)
+        {
+            foreach (var stat in Stats)
+            {
+                <div class="col-12 col-md-4 mb-3 mb-md-0">
+                    <div class="fs-2 fw-bold text-primary">@stat.Value</div>
+                    <div class="text-uppercase small text-muted">@stat.Label</div>
+                </div>
+            }
+        }
+    </div>
+</div>

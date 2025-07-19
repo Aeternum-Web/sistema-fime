@@ -4,6 +4,8 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// MudBlazor services
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

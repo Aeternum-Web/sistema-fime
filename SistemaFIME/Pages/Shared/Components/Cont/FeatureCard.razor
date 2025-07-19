@@ -1,0 +1,16 @@
+@* Componente reutilizable para tarjetas de funcionalidades *@
+@code {
+    [Parameter] public string Icon { get; set; }
+    [Parameter] public string IconColor { get; set; } = "primary";
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string Description { get; set; }
+}
+<div class="col-md-6">
+    <div class="card h-100 text-center border-0 shadow-sm">
+        <div class="card-body">
+            <i class="bi @Icon text-@IconColor fs-1 mb-3"></i>
+            <h5 class="card-title fw-bold">@Title</h5>
+            <p class="card-text">@Description</p>
+        </div>
+    </div>
+</div>
