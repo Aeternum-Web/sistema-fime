@@ -1,63 +1,95 @@
 @page "/"
 
-<PageTitle>Inicio - SistemaFIME</PageTitle>
+<PageTitle>Inicio - Comunidad Estudiantil FIME</PageTitle>
 
-<div class="max-w-6xl mx-auto px-4 py-8">
-    <!-- Hero Section -->
-    <div class="text-center p-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl text-white mb-12 shadow-xl">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">¡Bienvenido a SistemaFIME!</h1>
-        <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Sistema de gestión moderno desarrollado con Blazor Server y PostgreSQL
-        </p>
-        <div class="flex gap-4 justify-center flex-wrap">
-            <a href="/dashboard" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 no-underline shadow-lg">
-                📊 Ver Dashboard
-            </a>
-            <a href="/fetchdata" class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors duration-200 no-underline shadow-lg">
-                🗄️ Probar Base de Datos
-            </a>
+<div class="max-w-5xl mx-auto px-4 py-12">
+    <!-- HERO con imagen -->
+    <div class="relative text-center p-0 rounded-2xl overflow-hidden mb-12 shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1000&q=80" alt="Universidad" class="w-full h-64 md:h-80 object-cover brightness-75" />
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-white px-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 animate-pulse drop-shadow-lg">¡Bienvenido a la Comunidad Estudiantil FIME!</h1>
+            <p class="text-lg md:text-2xl font-medium opacity-90 mb-2 max-w-2xl mx-auto leading-relaxed drop-shadow">
+                Un espacio hecho por y para estudiantes: comparte, aprende, pregunta y haz amigos en FIME.
+            </p>
         </div>
     </div>
-    
-    <!-- Features Section -->
-    <div class="mb-12">
-        <h2 class="text-center text-3xl font-bold text-gray-800 mb-8">Características Principales</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            @foreach (var feature in features)
-            {
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-                    <div class="text-5xl mb-4">@feature.Icon</div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">@feature.Title</h3>
-                    <p class="text-gray-600 leading-relaxed">@feature.Description</p>
-                </div>
-            }
-        </div>
-    </div>
-    
-    <!-- Info Section -->
-    <div class="mb-12">
-        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-lg shadow-md">
-            <div class="flex items-start">
-                <div class="text-2xl mr-3">💡</div>
-                <div>
-                    <h3 class="text-lg font-semibold text-blue-800 mb-2">¿Cómo funciona?</h3>
-                    <p class="text-blue-700 leading-relaxed">
-                        Esta aplicación utiliza <span class="font-semibold">Blazor Server</span> para ejecutar código C# en el servidor
-                        y actualizar la interfaz de usuario a través de una conexión SignalR en tiempo real.
-                        Los datos se almacenan en <span class="font-semibold">PostgreSQL</span> y todo se ejecuta en contenedores Docker.
-                    </p>
-                </div>
+
+    <!-- ¿Qué puedes hacer aquí? -->
+    <div class="mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-8 text-center">¿Qué puedes hacer aquí?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-gradient-to-br from-blue-100 via-blue-50 to-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform">
+                <i class="bi bi-question-circle-fill text-blue-500 text-4xl mb-4 animate-bounce"></i>
+                <h3 class="font-bold text-xl mb-2">Resolver dudas</h3>
+                <p class="text-gray-600">Pregunta sobre materias, exámenes, profesores y recibe ayuda de la comunidad.</p>
+            </div>
+            <div class="bg-gradient-to-br from-pink-100 via-pink-50 to-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform">
+                <i class="bi bi-journal-text text-pink-500 text-4xl mb-4 animate-bounce"></i>
+                <h3 class="font-bold text-xl mb-2">Compartir apuntes</h3>
+                <p class="text-gray-600">Sube y descarga apuntes, guías y recursos útiles para tus materias.</p>
+            </div>
+            <div class="bg-gradient-to-br from-yellow-100 via-yellow-50 to-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform">
+                <i class="bi bi-calendar-event text-yellow-500 text-4xl mb-4 animate-bounce"></i>
+                <h3 class="font-bold text-xl mb-2">Eventos y talleres</h3>
+                <p class="text-gray-600">Infórmate sobre eventos, talleres y actividades dentro y fuera de la facultad.</p>
+            </div>
+            <div class="bg-gradient-to-br from-green-100 via-green-50 to-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform">
+                <i class="bi bi-emoji-laughing text-green-500 text-4xl mb-4 animate-bounce"></i>
+                <h3 class="font-bold text-xl mb-2">Memes y comunidad</h3>
+                <p class="text-gray-600">Disfruta de memes, historias y haz nuevos amigos en un ambiente sano.</p>
             </div>
         </div>
     </div>
-    
-    <!-- Stats Section -->
-    <div class="bg-white rounded-xl p-8 shadow-lg">
+
+    <!-- Testimonios -->
+    <div class="mb-14">
+        <h2 class="text-2xl md:text-3xl font-bold text-blue-700 mb-8 text-center">Testimonios de la comunidad</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
+                <img src="https://ui-avatars.com/api/?name=Ana+López&background=3b82f6&color=fff&size=96" alt="Ana López" class="rounded-full w-20 h-20 mb-3 shadow-md border-4 border-blue-100" />
+                <p class="text-gray-700 italic text-center mb-2">“Gracias a la comunidad resolví mi duda de Cálculo en minutos.”</p>
+                <span class="text-blue-600 font-semibold flex items-center gap-2"><i class="bi bi-person-circle"></i> Ana López</span>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
+                <img src="https://ui-avatars.com/api/?name=Pedro+Martinez&background=16a34a&color=fff&size=96" alt="Pedro Martinez" class="rounded-full w-20 h-20 mb-3 shadow-md border-4 border-green-100" />
+                <p class="text-gray-700 italic text-center mb-2">“Compartí mis apuntes y ahora tengo nuevos amigos.”</p>
+                <span class="text-green-600 font-semibold flex items-center gap-2"><i class="bi bi-person-circle"></i> Pedro Martínez</span>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center">
+                <img src="https://ui-avatars.com/api/?name=Karla+Reyes&background=fbbf24&color=fff&size=96" alt="Karla Reyes" class="rounded-full w-20 h-20 mb-3 shadow-md border-4 border-yellow-100" />
+                <p class="text-gray-700 italic text-center mb-2">“¡Los eventos publicados aquí son lo mejor de FIME!”</p>
+                <span class="text-yellow-600 font-semibold flex items-center gap-2"><i class="bi bi-person-circle"></i> Karla Reyes</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="text-center mb-14">
+        <h2 class="text-xl font-bold text-blue-700 mb-4">¡Síguenos en redes sociales!</h2>
+        <div class="flex flex-col sm:flex-row justify-center gap-6 mt-4">
+            <a href="#" class="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-800 text-white font-bold text-lg shadow-lg transition-all duration-200">
+                <i class="bi bi-facebook text-2xl"></i> Facebook
+            </a>
+            <a href="#" class="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:from-pink-600 hover:to-yellow-600 text-white font-bold text-lg shadow-lg transition-all duration-200">
+                <i class="bi bi-instagram text-2xl"></i> Instagram
+            </a>
+            <a href="#" class="flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-sky-400 hover:bg-sky-600 text-white font-bold text-lg shadow-lg transition-all duration-200">
+                <i class="bi bi-telegram text-2xl"></i> Telegram
+            </a>
+        </div>
+        <div class="mt-8 flex flex-col items-center">
+            <span class="text-blue-700 text-lg font-semibold mb-2">¡Comparte, pregunta y haz comunidad!</span>
+            <span class="text-blue-400 text-sm">#OrgulloFIME #ComunidadEstudiantil</span>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="bg-white rounded-2xl p-8 shadow-xl">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
             @foreach (var stat in stats)
             {
                 <div class="group">
-                    <div class="text-3xl font-bold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-200">@stat.Value</div>
+                    <div class="text-3xl font-extrabold text-blue-600 mb-2 group-hover:text-blue-700 transition-colors duration-200">@stat.Value</div>
                     <div class="text-gray-500 text-sm font-medium uppercase tracking-wide">@stat.Label</div>
                 </div>
             }
@@ -67,16 +99,6 @@
 
 @code {
     private DateTime connectionTime = DateTime.Now;
-
-    private List<FeatureItem> features = new()
-    {
-        new FeatureItem { Icon = "⚡", Title = "Blazor Server", Description = "Interfaz de usuario interactiva con C# en tiempo real" },
-        new FeatureItem { Icon = "🗄️", Title = "PostgreSQL", Description = "Base de datos robusta y escalable para tus datos" },
-        new FeatureItem { Icon = "🎨", Title = "CSS Vanilla", Description = "Diseño limpio sin dependencias externas" },
-        new FeatureItem { Icon = "🐳", Title = "Docker", Description = "Despliegue fácil y consistente en cualquier entorno" },
-        new FeatureItem { Icon = "📱", Title = "Responsive", Description = "Funciona perfectamente en dispositivos móviles" },
-        new FeatureItem { Icon = "🔒", Title = "Seguro", Description = "Implementa las mejores prácticas de seguridad" }
-    };
 
     private List<StatItem> stats = new();
 
@@ -89,13 +111,6 @@
             new StatItem { Value = connectionTime.ToString("HH:mm"), Label = "Hora del servidor" },
             new StatItem { Value = "v1.0", Label = "Versión" }
         };
-    }
-
-    public class FeatureItem
-    {
-        public string Icon { get; set; } = "";
-        public string Title { get; set; } = "";
-        public string Description { get; set; } = "";
     }
 
     public class StatItem
