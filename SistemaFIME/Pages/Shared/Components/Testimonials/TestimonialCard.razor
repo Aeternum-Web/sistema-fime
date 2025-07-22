@@ -1,0 +1,20 @@
+@namespace SistemaFIME.Pages.Shared.Components.Testimonials
+
+<div class="bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border-t-4 border-@(BorderColor) hover:shadow-2xl transition-shadow duration-200">
+    <img src="https://ui-avatars.com/api/?name=@(Name.Replace(" ", "+"))&background=@AvatarBackground&color=fff&size=96" 
+         alt="@Name" 
+         class="rounded-full w-24 h-24 mb-4 shadow-lg border-4 border-@(BorderColorClass)" />
+    <p class="text-gray-800 italic text-center mb-3">"@Quote"</p>
+    <span class="text-@(TextColor) font-semibold flex items-center gap-2">
+        <i class="bi bi-person-circle"></i> @Name
+    </span>
+</div>
+
+@code {
+    [Parameter] public string Name { get; set; } = "";
+    [Parameter] public string Quote { get; set; } = "";
+    [Parameter] public string BorderColor { get; set; } = "";
+    [Parameter] public string AvatarBackground { get; set; } = "";
+    [Parameter] public string TextColor { get; set; } = "";
+    [Parameter] public string BorderColorClass { get; set; } = "";
+}

@@ -1,0 +1,69 @@
+@namespace SistemaFIME.Pages.Shared.Components.SocialMedia
+
+<!-- Social Media Section -->
+<section class="mb-20 sm:mb-32">
+    <div class="text-center mb-12 sm:mb-16 px-4">
+        <span class="inline-block px-4 py-2 bg-gradient-to-r from-pink-100 to-purple-100 text-purple-800 rounded-full text-sm font-semibold mb-4">
+            <i class="bi bi-globe me-2"></i>Redes Sociales
+        </span>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-4 sm:mb-6">
+            ¡Conecta con nosotros!
+        </h2>
+        <p class="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            Síguenos en nuestras redes sociales para estar al día con las últimas noticias, eventos y contenido exclusivo
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4">
+        <SocialMediaCard 
+            Icon="bi-facebook"
+            Title="Facebook"
+            Description="Únete a nuestra comunidad en Facebook para compartir experiencias y mantenerte conectado"
+            GradientFrom="blue-600"
+            GradientTo="blue-700"
+            BackgroundFrom="blue-50"
+            BackgroundTo="indigo-50"
+            TextColor="blue-600"
+            HoverTextColor="blue-700"
+            ActionText="Seguir"
+            Url="#" />
+
+        <SocialMediaCard 
+            Icon="bi-instagram"
+            Title="Instagram"
+            Description="Descubre contenido visual, historias y momentos especiales de nuestra comunidad"
+            GradientFrom="pink-500"
+            GradientTo="yellow-500"
+            BackgroundFrom="pink-50"
+            BackgroundTo="rose-50"
+            TextColor="pink-600"
+            HoverTextColor="pink-700"
+            ActionText="Seguir"
+            Url="#"
+            IsGradientSpecial="true" />
+
+        <SocialMediaCard 
+            Icon="bi-telegram"
+            Title="Telegram"
+            Description="Únete a nuestro canal de Telegram para recibir notificaciones instantáneas"
+            GradientFrom="sky-500"
+            GradientTo="blue-600"
+            BackgroundFrom="sky-50"
+            BackgroundTo="blue-50"
+            TextColor="sky-600"
+            HoverTextColor="sky-700"
+            ActionText="Unirse"
+            Url="#" />
+    </div>
+    
+    <!-- Call to action -->
+    <div class="text-center bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-8 sm:p-12 text-white mx-4">
+        <h3 class="text-xl sm:text-3xl font-bold mb-3 sm:mb-4">¡Comparte, pregunta y haz comunidad!</h3>
+        <p class="text-base sm:text-xl opacity-90 mb-4 sm:mb-6">Forma parte de la red de estudiantes más activa de FIME</p>
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 text-sm sm:text-lg">
+            <span class="bg-white/20 px-3 py-1 sm:px-4 sm:py-2 rounded-full">#OrgulloFIME</span>
+            <span class="bg-white/20 px-3 py-1 sm:px-4 sm:py-2 rounded-full">#ComunidadEstudiantil</span>
+            <span class="bg-white/20 px-3 py-1 sm:px-4 sm:py-2 rounded-full">#UANL</span>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,42 @@
+@namespace SistemaFIME.Pages.Shared.Components.Testimonials
+
+<!-- Testimonials Section -->
+<section class="mb-32">
+    <div class="text-center mb-20">
+        <span class="inline-block px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold mb-4">
+            Testimonios
+        </span>
+        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+            Lo que dice nuestra comunidad
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Historias reales de estudiantes que han encontrado su lugar en FIME
+        </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <TestimonialCard 
+            Name="Ana López"
+            Quote="Gracias a la comunidad resolví mi duda de Cálculo en minutos."
+            BorderColor="blue-400"
+            AvatarBackground="3b82f6"
+            TextColor="blue-700"
+            BorderColorClass="blue-200" />
+
+        <TestimonialCard 
+            Name="Pedro Martínez"
+            Quote="Compartí mis apuntes y ahora tengo nuevos amigos."
+            BorderColor="green-400"
+            AvatarBackground="16a34a"
+            TextColor="green-700"
+            BorderColorClass="green-200" />
+
+        <TestimonialCard 
+            Name="Karla Reyes"
+            Quote="¡Los eventos publicados aquí son lo mejor de FIME!"
+            BorderColor="yellow-400"
+            AvatarBackground="fbbf24"
+            TextColor="yellow-700"
+            BorderColorClass="yellow-200" />
+    </div>
+</section>

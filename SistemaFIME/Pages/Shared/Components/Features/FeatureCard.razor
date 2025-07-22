@@ -1,0 +1,29 @@
+@namespace SistemaFIME.Pages.Shared.Components.Features
+
+<div class="group relative bg-white rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+    <div class="absolute inset-0 bg-gradient-to-br from-@(BackgroundFrom) to-@(BackgroundTo) rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="relative z-10">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-@(GradientFrom) to-@(GradientTo) rounded-2xl flex items-center justify-center mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
+            <i class="bi @Icon text-white text-2xl sm:text-3xl"></i>
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">@Title</h3>
+        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+            @Description
+        </p>
+        <div class="flex items-center text-@(TextColor) text-sm font-medium group-hover:text-@(HoverTextColor)">
+            <span>Explorar <i class="bi bi-arrow-right ms-1"></i></span>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string Icon { get; set; } = "";
+    [Parameter] public string Title { get; set; } = "";
+    [Parameter] public string Description { get; set; } = "";
+    [Parameter] public string GradientFrom { get; set; } = "";
+    [Parameter] public string GradientTo { get; set; } = "";
+    [Parameter] public string BackgroundFrom { get; set; } = "";
+    [Parameter] public string BackgroundTo { get; set; } = "";
+    [Parameter] public string TextColor { get; set; } = "";
+    [Parameter] public string HoverTextColor { get; set; } = "";
+}
