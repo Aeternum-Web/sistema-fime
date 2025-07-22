@@ -1,0 +1,258 @@
+@page "/registro"
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager NavigationManager
+
+<div class="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <div class="mx-auto h-20 w-20 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center shadow-xl mb-6">
+                <i class="bi bi-person-plus-fill text-white text-3xl"></i>
+            </div>
+            <h2 class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3">
+                ¡Únete a FIME!
+            </h2>
+            <p class="text-gray-600 text-lg">
+                Crea tu cuenta y forma parte de nuestra comunidad académica
+            </p>
+        </div>
+        
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 p-8">
+            <EditForm Model="@registroModel" OnValidSubmit="@HandleRegistro" class="space-y-6">
+                <DataAnnotationsValidator />
+                
+                <div class="space-y-2">
+                    <label for="usuario" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="bi bi-person-fill text-emerald-600"></i>
+                        Usuario
+                    </label>
+                    <div class="relative">
+                        <InputText @bind-Value="registroModel.Usuario" 
+                                  id="usuario" 
+                                  autocomplete="username" 
+                                  required 
+                                  class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                  placeholder="Tu nombre de usuario" />
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-person text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="bi bi-envelope-fill text-emerald-600"></i>
+                        Correo electrónico
+                    </label>
+                    <div class="relative">
+                        <InputText @bind-Value="registroModel.Email" 
+                                  id="email" 
+                                  type="email" 
+                                  autocomplete="email" 
+                                  required 
+                                  class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                  placeholder="tu@email.com" />
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-at text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="password" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                            <i class="bi bi-shield-lock-fill text-emerald-600"></i>
+                            Contraseña
+                        </label>
+                        <div class="relative">
+                            <InputText @bind-Value="registroModel.Password" 
+                                      id="password" 
+                                      type="password" 
+                                      autocomplete="new-password" 
+                                      required 
+                                      class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                      placeholder="••••••••" />
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="bi bi-key-fill text-gray-400 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="confirmPassword" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                            <i class="bi bi-shield-check text-emerald-600"></i>
+                            Confirmar Contraseña
+                        </label>
+                        <div class="relative">
+                            <InputText @bind-Value="registroModel.ConfirmPassword" 
+                                      id="confirmPassword" 
+                                      type="password" 
+                                      autocomplete="new-password" 
+                                      required 
+                                      class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-emerald-100 focus:border-emerald-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                      placeholder="••••••••" />
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <i class="bi bi-key-fill text-gray-400 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Validation Messages -->
+                <ValidationSummary class="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm" />
+
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
+                        <i class="bi bi-exclamation-triangle-fill text-red-500"></i>
+                        <span class="text-red-700 text-sm font-medium">@errorMessage</span>
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(successMessage))
+                {
+                    <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
+                        <i class="bi bi-check-circle-fill text-emerald-500"></i>
+                        <span class="text-emerald-700 text-sm font-medium">@successMessage</span>
+                    </div>
+                }
+
+                <div class="bg-gray-50 rounded-xl p-4">
+                    <div class="flex items-start gap-3">
+                        <input id="terms" 
+                               name="terms" 
+                               type="checkbox" 
+                               @bind="registroModel.AceptaTerminos"
+                               class="h-5 w-5 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded-lg mt-1">
+                        <label for="terms" class="block text-sm font-medium text-gray-700">
+                            <div class="flex items-center gap-2 mb-1">
+                                <i class="bi bi-shield-check text-emerald-600"></i>
+                                <span>Acepto los términos y condiciones</span>
+                            </div>
+                            <div class="text-xs text-gray-600">
+                                Al registrarte, aceptas nuestros 
+                                <a href="#" class="text-emerald-600 hover:text-emerald-500 font-semibold">términos y condiciones</a>
+                                y nuestra 
+                                <a href="#" class="text-emerald-600 hover:text-emerald-500 font-semibold">política de privacidad</a>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Register Button -->
+                <div class="pt-4">
+                    <button type="submit" 
+                            disabled="@isLoading"
+                            class="group relative w-full flex justify-center py-4 px-6 border border-transparent text-lg font-semibold rounded-2xl text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 focus:outline-none focus:ring-4 focus:ring-emerald-200 disabled:opacity-50 disabled:cursor-not-allowed transform transition-all duration-200 hover:scale-105 shadow-xl hover:shadow-2xl">
+                        @if (isLoading)
+                        {
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-4">
+                                <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </span>
+                            @:Creando cuenta...
+                        }
+                        else
+                        {
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-4">
+                                <i class="bi bi-person-plus-fill text-white text-xl group-hover:scale-110 transition-transform duration-200"></i>
+                            </span>
+                            @:Crear Mi Cuenta
+                        }
+                    </button>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center pt-6 border-t border-gray-200">
+                    <span class="text-gray-600">
+                        ¿Ya tienes cuenta? 
+                        <a href="/login" class="font-semibold text-emerald-600 hover:text-emerald-500 transition-colors duration-200 inline-flex items-center gap-2">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                            Inicia sesión aquí
+                        </a>
+                    </span>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegistroModel registroModel = new();
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+    private bool isLoading = false;
+
+    private async Task HandleRegistro()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+        
+        try
+        {
+            // Validar que las contraseñas coincidan
+            if (registroModel.Password != registroModel.ConfirmPassword)
+            {
+                errorMessage = "Las contraseñas no coinciden.";
+                return;
+            }
+
+            // Validar que acepte los términos
+            if (!registroModel.AceptaTerminos)
+            {
+                errorMessage = "Debes aceptar los términos y condiciones.";
+                return;
+            }
+
+            // Simular llamada a API
+            await Task.Delay(1500);
+            
+            // Aquí implementarías la lógica de registro
+            // Por ejemplo, llamar a un servicio de registro
+            
+            // Simulación de registro exitoso
+            successMessage = "¡Cuenta creada exitosamente! Revisa tu correo para activar tu cuenta.";
+            
+            // Limpiar el formulario después del registro exitoso
+            await Task.Delay(2000);
+            registroModel = new();
+            successMessage = string.Empty;
+            
+            // Redirigir al login
+            NavigationManager.NavigateTo("/login");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error al crear la cuenta. Intenta nuevamente.";
+            Console.WriteLine($"Error en registro: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    public class RegistroModel
+    {
+        [Required(ErrorMessage = "El usuario es requerido")]
+        [StringLength(50, ErrorMessage = "El usuario no puede exceder 50 caracteres")]
+        public string Usuario { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "El correo electrónico es requerido")]
+        [EmailAddress(ErrorMessage = "Formato de correo electrónico inválido")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
+        [StringLength(100, ErrorMessage = "La contraseña no puede exceder 100 caracteres")]
+        public string Password { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Debes confirmar la contraseña")]
+        public string ConfirmPassword { get; set; } = string.Empty;
+
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Debes aceptar los términos y condiciones")]
+        public bool AceptaTerminos { get; set; } = false;
+    }
+}

@@ -1,0 +1,203 @@
+@page "/login"
+@using Microsoft.AspNetCore.Components.Forms
+@using System.ComponentModel.DataAnnotations
+@inject NavigationManager NavigationManager
+
+<div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <div class="mx-auto h-20 w-20 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center shadow-xl mb-6">
+                <i class="bi bi-mortarboard-fill text-white text-3xl"></i>
+            </div>
+            <h2 class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-3">
+                ¡Bienvenido de vuelta!
+            </h2>
+            <p class="text-gray-600 text-lg">
+                Inicia sesión en tu cuenta del Sistema FIME
+            </p>
+        </div>
+        
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl border border-white/20 p-8">
+            <EditForm Model="@loginModel" OnValidSubmit="@HandleLogin" class="space-y-6">
+                <DataAnnotationsValidator />
+                
+                <div class="space-y-2">
+                    <label for="email" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="bi bi-envelope-fill text-blue-600"></i>
+                        Correo electrónico
+                    </label>
+                    <div class="relative">
+                        <InputText @bind-Value="loginModel.Email" 
+                                  id="email" 
+                                  type="email" 
+                                  autocomplete="email" 
+                                  required 
+                                  class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                  placeholder="tu@email.com" />
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-at text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="password" class="block text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="bi bi-shield-lock-fill text-blue-600"></i>
+                        Contraseña
+                    </label>
+                    <div class="relative">
+                        <InputText @bind-Value="loginModel.Password" 
+                                  id="password" 
+                                  type="password" 
+                                  autocomplete="current-password" 
+                                  required 
+                                  class="block w-full px-4 py-4 pl-12 text-gray-900 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 text-lg placeholder-gray-400" 
+                                  placeholder="••••••••" />
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                            <i class="bi bi-key-fill text-gray-400 text-lg"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <ValidationSummary class="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700 text-sm" />
+
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-4 flex items-center gap-3">
+                        <i class="bi bi-exclamation-triangle-fill text-red-500"></i>
+                        <span class="text-red-700 text-sm font-medium">@errorMessage</span>
+                    </div>
+                }
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <input id="remember-me" 
+                               name="remember-me" 
+                               type="checkbox" 
+                               @bind="loginModel.RememberMe"
+                               class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded-lg">
+                        <label for="remember-me" class="block text-sm font-medium text-gray-700 flex items-center gap-2">
+                            <i class="bi bi-check-circle text-green-500"></i>
+                            Recordarme
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-semibold text-blue-600 hover:text-blue-500 transition-colors duration-200 flex items-center gap-2">
+                            <i class="bi bi-question-circle"></i>
+                            ¿Olvidaste tu contraseña?
+                        </a>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" 
+                            disabled="@isLoading"
+                            class="group relative w-full flex justify-center py-4 px-6 border border-transparent text-lg font-semibold rounded-2xl text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-200 disabled:opacity-50 disabled:cursor-not-allowed transform transition-all duration-200 hover:scale-105 shadow-xl hover:shadow-2xl">
+                        @if (isLoading)
+                        {
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-4">
+                                <svg class="animate-spin h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </span>
+                            @:Iniciando sesión...
+                        }
+                        else
+                        {
+                            <span class="absolute left-0 inset-y-0 flex items-center pl-4">
+                                <i class="bi bi-box-arrow-in-right text-white text-xl group-hover:scale-110 transition-transform duration-200"></i>
+                            </span>
+                            @:Iniciar Sesión
+                        }
+                    </button>
+                </div>
+
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-6">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="bi bi-info-circle-fill text-blue-600"></i>
+                        <span class="text-sm font-semibold text-blue-800">Credenciales de prueba:</span>
+                    </div>
+                    <div class="text-xs text-blue-700 space-y-1">
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-person-badge"></i>
+                            <strong>Admin:</strong> admin@fime.com / admin123
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="bi bi-mortarboard"></i>
+                            <strong>Estudiante:</strong> estudiante@fime.com / estudiante123
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-6 border-t border-gray-200">
+                    <span class="text-gray-600">
+                        ¿No tienes cuenta? 
+                        <a href="/registro" class="font-semibold text-blue-600 hover:text-blue-500 transition-colors duration-200 inline-flex items-center gap-2">
+                            <i class="bi bi-person-plus"></i>
+                            Regístrate aquí
+                        </a>
+                    </span>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginModel loginModel = new();
+    private string errorMessage = string.Empty;
+    private bool isLoading = false;
+
+    private async Task HandleLogin()
+    {
+        isLoading = true;
+        errorMessage = string.Empty;
+        
+        try
+        {
+            // Aquí implementarías la lógica de autenticación
+            // Por ejemplo, llamar a un servicio de autenticación
+            await Task.Delay(1000); // Simular llamada a API
+            
+            // Ejemplo de validación básica
+            if (loginModel.Email == "admin@fime.com" && loginModel.Password == "admin123")
+            {
+                // Redirigir al dashboard
+                NavigationManager.NavigateTo("/dashboard");
+            }
+            else if (loginModel.Email == "estudiante@fime.com" && loginModel.Password == "estudiante123")
+            {
+                // Redirigir al dashboard para estudiantes
+                NavigationManager.NavigateTo("/dashboard");
+            }
+            else
+            {
+                errorMessage = "Credenciales incorrectas. Verifica tu email y contraseña.";
+            }
+        }
+        catch (Exception ex)
+        {
+            errorMessage = "Error al iniciar sesión. Intenta nuevamente.";
+            Console.WriteLine($"Error en login: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "El correo electrónico es requerido")]
+        [EmailAddress(ErrorMessage = "Formato de correo electrónico inválido")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "La contraseña es requerida")]
+        [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres")]
+        public string Password { get; set; } = string.Empty;
+
+        public bool RememberMe { get; set; } = false;
+    }
+}
