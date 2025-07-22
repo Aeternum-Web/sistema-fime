@@ -1,6 +1,6 @@
-@* Stats Section Component *@
+@* Dashboard Stats Section Component *@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-    <StatsCard 
+    <DashboardStatsCard 
         Title="Profesores" 
         Value="@ProfesoresCount.ToString()" 
         Subtitle="Activos en la comunidad"
@@ -8,7 +8,7 @@
         BackgroundGradient="from-blue-500 to-blue-600"
         TextColor="text-blue-600" />
     
-    <StatsCard 
+    <DashboardStatsCard 
         Title="Materias" 
         Value="@MateriasCount.ToString()" 
         Subtitle="Disponibles"
@@ -16,7 +16,7 @@
         BackgroundGradient="from-green-500 to-green-600"
         TextColor="text-green-600" />
     
-    <StatsCard 
+    <DashboardStatsCard 
         Title="Comentarios" 
         Value="@ComentariosCount.ToString()" 
         Subtitle="Esta semana"
@@ -24,7 +24,7 @@
         BackgroundGradient="from-purple-500 to-purple-600"
         TextColor="text-purple-600" />
     
-    <StatsCard 
+    <DashboardStatsCard 
         Title="Evaluaciones" 
         Value="@EvaluacionesCount.ToString()" 
         Subtitle="Promedio: 4.5/5"

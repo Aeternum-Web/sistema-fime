@@ -1,6 +1,5 @@
 @page "/"
 @page "/home"
-@using StatsComponent = SistemaFIME.Pages.Shared.Components.content.Stats.StatsSection
 
 <PageTitle>Inicio - Comunidad Estudiantil FIME</PageTitle>
 
@@ -12,22 +11,22 @@
         <FeaturesSection />
         <TestimonialsSection />
         <SocialMediaSection />
-        <StatsComponent Stats="@stats" />
+        <StatsSection Stats="@stats" />
     </div>
 </div>
 
 @code {
     private DateTime connectionTime = DateTime.Now;
-    private List<StatsComponent.StatItem> stats = new();
+    private List<StatsSection.StatItem> stats = new();
 
     protected override void OnInitialized()
     {
         connectionTime = DateTime.Now;
-        stats = new List<StatsComponent.StatItem>
+        stats = new List<StatsSection.StatItem>
         {
-            new StatsComponent.StatItem { Value = DateTime.Now.Year.ToString(), Label = "Año actual" },
-            new StatsComponent.StatItem { Value = connectionTime.ToString("HH:mm"), Label = "Hora del servidor" },
-            new StatsComponent.StatItem { Value = "v1.0", Label = "Versión" }
+            new StatsSection.StatItem { Value = DateTime.Now.Year.ToString(), Label = "Año actual" },
+            new StatsSection.StatItem { Value = connectionTime.ToString("HH:mm"), Label = "Hora del servidor" },
+            new StatsSection.StatItem { Value = "v1.0", Label = "Versión" }
         };
     }
 }
