@@ -1,11 +1,12 @@
 @inherits LayoutComponentBase
 @namespace SistemaFIME.Pages.Shared
 @using SistemaFIME.Pages.Shared.Components
+@using SistemaFIME.Pages.Shared.Components.Menus
 
 <div class="app-layout">
     <Header OnMenuToggle="ToggleNavbar" />
     
-    <Navbar IsOpen="isNavbarOpen" OnClose="CloseNavbar" />
+    <MenuGuest IsOpen="isNavbarOpen" OnClose="CloseNavbar" />
     
     <main class="main-content @(isNavbarOpen ? "content-shifted" : "")">
         <div class="content-wrapper">

@@ -1,0 +1,72 @@
+@namespace SistemaFIME.Pages.Shared.Components.Menus
+
+<div class="fixed inset-0 z-40 flex transform transition-transform duration-300 ease-in-out @(IsOpen ? "translate-x-0" : "-translate-x-full")">
+    <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity @(IsOpen ? "opacity-100" : "opacity-0")" @onclick="CloseMenu"></div>
+    
+    <div class="relative flex flex-col w-64 max-w-sm bg-white dark:bg-gray-800 h-full shadow-xl">
+        <div class="flex items-center justify-between p-4 border-b dark:border-gray-700">
+            <div class="flex items-center space-x-2">
+                <i class="bi bi-building text-xl"></i>
+                <span class="font-semibold text-gray-800 dark:text-white">SistemaFIME</span>
+            </div>
+            <button class="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700" @onclick="CloseMenu" title="Cerrar menú">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Principal</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="" Match="NavLinkMatch.All" @onclick="CloseMenu">
+                    <i class="bi bi-house-door mr-3"></i>
+                    <span>Inicio</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Acceso</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="login" @onclick="CloseMenu">
+                    <i class="bi bi-box-arrow-in-right mr-3"></i>
+                    <span>Iniciar Sesión</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="register" @onclick="CloseMenu">
+                    <i class="bi bi-person-plus mr-3"></i>
+                    <span>Registrarse</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Información</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="about" @onclick="CloseMenu">
+                    <i class="bi bi-info-circle mr-3"></i>
+                    <span>Acerca de</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="contact" @onclick="CloseMenu">
+                    <i class="bi bi-envelope mr-3"></i>
+                    <span>Contacto</span>
+                </NavLink>
+            </div>
+        </div>
+        
+        <div class="border-t dark:border-gray-700 p-4">
+            <div class="flex items-center justify-center">
+                <div class="text-center">
+                    <div class="text-sm text-gray-500 dark:text-gray-400">¿Necesitas ayuda?</div>
+                    <NavLink class="text-blue-600 dark:text-blue-400 hover:underline text-sm" href="help" @onclick="CloseMenu">
+                        Centro de Ayuda
+                    </NavLink>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async Task CloseMenu()
+    {
+        await OnClose.InvokeAsync();
+    }
+}

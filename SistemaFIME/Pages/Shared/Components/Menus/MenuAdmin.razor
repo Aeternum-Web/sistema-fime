@@ -1,4 +1,4 @@
-@namespace SistemaFIME.Pages.Shared.Components
+@namespace SistemaFIME.Pages.Shared.Components.Menus
 
 <div class="fixed inset-0 z-40 flex transform transition-transform duration-300 ease-in-out @(IsOpen ? "translate-x-0" : "-translate-x-full")">
     <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity @(IsOpen ? "opacity-100" : "opacity-0")" @onclick="CloseMenu"></div>
@@ -28,11 +28,39 @@
             </div>
             
             <div class="mb-6">
-                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Gestión</h3>
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Gestión de Usuarios</h3>
                 <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="usuarios" @onclick="CloseMenu">
                     <i class="bi bi-people mr-3"></i>
                     <span>Usuarios</span>
                 </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="profesores" @onclick="CloseMenu">
+                    <i class="bi bi-person-badge mr-3"></i>
+                    <span>Profesores</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="estudiantes" @onclick="CloseMenu">
+                    <i class="bi bi-mortarboard mr-3"></i>
+                    <span>Estudiantes</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Gestión Académica</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="materias" @onclick="CloseMenu">
+                    <i class="bi bi-book mr-3"></i>
+                    <span>Materias</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="carreras" @onclick="CloseMenu">
+                    <i class="bi bi-diagram-3 mr-3"></i>
+                    <span>Carreras</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="semestres" @onclick="CloseMenu">
+                    <i class="bi bi-calendar-range mr-3"></i>
+                    <span>Semestres</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Sistema</h3>
                 <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="productos" @onclick="CloseMenu">
                     <i class="bi bi-box mr-3"></i>
                     <span>Productos</span>
@@ -40,6 +68,10 @@
                 <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="reportes" @onclick="CloseMenu">
                     <i class="bi bi-bar-chart mr-3"></i>
                     <span>Reportes</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="configuracion" @onclick="CloseMenu">
+                    <i class="bi bi-gear mr-3"></i>
+                    <span>Configuración</span>
                 </NavLink>
             </div>
             
@@ -58,13 +90,16 @@
         
         <div class="border-t dark:border-gray-700 p-4">
             <div class="flex items-center">
-                <div class="flex-shrink-0 mr-3"><i class="bi bi-person-circle"></i></div>
-                <div>
-                    <div class="font-medium text-gray-800 dark:text-white">Usuario</div>
-                    <div class="text-sm text-gray-500 dark:text-gray-400">Administrador</div>
+                <div class="flex-shrink-0 mr-3"><i class="bi bi-person-circle text-xl"></i></div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800 dark:text-white">Administrador</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Sistema FIME</div>
+                </div>
+                <button class="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700" title="Cerrar sesión">
+                    <i class="bi bi-box-arrow-right text-gray-500"></i>
+                </button>
             </div>
         </div>
-    </div>
     </div>
 </div>
 

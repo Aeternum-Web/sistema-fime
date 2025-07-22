@@ -1,0 +1,102 @@
+@namespace SistemaFIME.Pages.Shared.Components.Menus
+
+<div class="fixed inset-0 z-40 flex transform transition-transform duration-300 ease-in-out @(IsOpen ? "translate-x-0" : "-translate-x-full")">
+    <div class="absolute inset-0 bg-black bg-opacity-50 transition-opacity @(IsOpen ? "opacity-100" : "opacity-0")" @onclick="CloseMenu"></div>
+    
+    <div class="relative flex flex-col w-64 max-w-sm bg-white dark:bg-gray-800 h-full shadow-xl">
+        <div class="flex items-center justify-between p-4 border-b dark:border-gray-700">
+            <div class="flex items-center space-x-2">
+                <i class="bi bi-building text-xl"></i>
+                <span class="font-semibold text-gray-800 dark:text-white">SistemaFIME</span>
+            </div>
+            <button class="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700" @onclick="CloseMenu" title="Cerrar menú">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Principal</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="" Match="NavLinkMatch.All" @onclick="CloseMenu">
+                    <i class="bi bi-house-door mr-3"></i>
+                    <span>Inicio</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="dashboard" @onclick="CloseMenu">
+                    <i class="bi bi-graph-up mr-3"></i>
+                    <span>Mi Dashboard</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Académico</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="tareas" @onclick="CloseMenu">
+                    <i class="bi bi-clipboard-check mr-3"></i>
+                    <span>Tareas</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="examenes" @onclick="CloseMenu">
+                    <i class="bi bi-file-earmark-text mr-3"></i>
+                    <span>Exámenes</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="calificaciones" @onclick="CloseMenu">
+                    <i class="bi bi-award mr-3"></i>
+                    <span>Calificaciones</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="horario" @onclick="CloseMenu">
+                    <i class="bi bi-calendar3 mr-3"></i>
+                    <span>Horario</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Evaluación</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="evaluacion-profesores" @onclick="CloseMenu">
+                    <i class="bi bi-star mr-3"></i>
+                    <span>Evaluar Profesores</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="mis-evaluaciones" @onclick="CloseMenu">
+                    <i class="bi bi-clipboard-data mr-3"></i>
+                    <span>Mis Evaluaciones</span>
+                </NavLink>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Recursos</h3>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="materias" @onclick="CloseMenu">
+                    <i class="bi bi-book mr-3"></i>
+                    <span>Mis Materias</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="biblioteca" @onclick="CloseMenu">
+                    <i class="bi bi-journal-bookmark mr-3"></i>
+                    <span>Biblioteca</span>
+                </NavLink>
+                <NavLink class="flex items-center px-2 py-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700" href="foros" @onclick="CloseMenu">
+                    <i class="bi bi-chat-dots mr-3"></i>
+                    <span>Foros</span>
+                </NavLink>
+            </div>
+        </div>
+        
+        <div class="border-t dark:border-gray-700 p-4">
+            <div class="flex items-center">
+                <div class="flex-shrink-0 mr-3"><i class="bi bi-person-circle text-xl"></i></div>
+                <div class="flex-1">
+                    <div class="font-medium text-gray-800 dark:text-white">Estudiante</div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">Matrícula: 12345678</div>
+                </div>
+                <button class="p-1 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700" title="Cerrar sesión">
+                    <i class="bi bi-box-arrow-right text-gray-500"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+
+    private async Task CloseMenu()
+    {
+        await OnClose.InvokeAsync();
+    }
+}
