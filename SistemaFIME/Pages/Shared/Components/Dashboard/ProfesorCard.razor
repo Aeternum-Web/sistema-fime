@@ -1,0 +1,50 @@
+@* Profesor Card Component *@
+<div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer border border-gray-100 group" 
+     @onclick="() => OnProfesorSelected.InvokeAsync(Profesor)">
+    
+    <div class="flex flex-col items-center text-center">
+        <!-- Avatar with online status -->
+        <div class="relative mb-4">
+            <div class="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-blue-200 transition-all duration-300">
+                <img src="@Profesor.Avatar" alt="@Profesor.Nombre" class="w-full h-full object-cover" />
+            </div>
+            <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-3 border-white @(Profesor.EnLinea ? "bg-green-500" : "bg-gray-400") shadow-md"></div>
+        </div>
+        
+        <!-- Profesor Info -->
+        <div class="w-full">
+            <h4 class="text-xl font-bold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors">@Profesor.Nombre</h4>
+            <p class="text-gray-600 text-sm mb-4 font-medium">@Profesor.Titulo</p>
+            
+            <!-- Materias Tags -->
+            <div class="flex flex-wrap justify-center gap-2 mb-4">
+                @foreach (var materia in Profesor.Materias.Take(2))
+                {
+                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium border border-blue-200">
+                        @materia
+                    </span>
+                }
+                @if (Profesor.Materias.Count > 2)
+                {
+                    <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium border border-gray-200">
+                        +@(Profesor.Materias.Count - 2) más
+                    </span>
+                }
+            </div>
+            
+            <!-- Rating -->
+            <div class="flex items-center justify-center gap-1">
+                @for (int i = 1; i <= 5; i++)
+                {
+                    <i class="@(i <= Profesor.Rating ? "bi bi-star-fill text-yellow-400" : "bi bi-star text-gray-300") text-sm"></i>
+                }
+                <span class="text-xs text-gray-500 ml-2 font-medium">(@Profesor.NumeroEvaluaciones)</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public Profesor Profesor { get; set; } = new();
+    [Parameter] public EventCallback<Profesor> OnProfesorSelected { get; set; }
+}

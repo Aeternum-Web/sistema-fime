@@ -1,0 +1,41 @@
+@* Stats Section Component *@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+    <StatsCard 
+        Title="Profesores" 
+        Value="@ProfesoresCount.ToString()" 
+        Subtitle="Activos en la comunidad"
+        IconClass="bi bi-person-video3"
+        BackgroundGradient="from-blue-500 to-blue-600"
+        TextColor="text-blue-600" />
+    
+    <StatsCard 
+        Title="Materias" 
+        Value="@MateriasCount.ToString()" 
+        Subtitle="Disponibles"
+        IconClass="bi bi-book"
+        BackgroundGradient="from-green-500 to-green-600"
+        TextColor="text-green-600" />
+    
+    <StatsCard 
+        Title="Comentarios" 
+        Value="@ComentariosCount.ToString()" 
+        Subtitle="Esta semana"
+        IconClass="bi bi-chat-square-text"
+        BackgroundGradient="from-purple-500 to-purple-600"
+        TextColor="text-purple-600" />
+    
+    <StatsCard 
+        Title="Evaluaciones" 
+        Value="@EvaluacionesCount.ToString()" 
+        Subtitle="Promedio: 4.5/5"
+        IconClass="bi bi-star-fill"
+        BackgroundGradient="from-yellow-500 to-yellow-600"
+        TextColor="text-yellow-600" />
+</div>
+
+@code {
+    [Parameter] public int ProfesoresCount { get; set; }
+    [Parameter] public int MateriasCount { get; set; }
+    [Parameter] public int ComentariosCount { get; set; }
+    [Parameter] public int EvaluacionesCount { get; set; }
+}

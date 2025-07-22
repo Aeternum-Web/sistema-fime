@@ -1,0 +1,106 @@
+@* Comentarios Section Component *@
+<div class="mb-12">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <i class="bi bi-chat-dots text-white text-lg"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">Muro de la Comunidad</h2>
+        </div>
+        
+        <button class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center space-x-2" 
+                @onclick="OnMostrarFormulario">
+            <i class="bi bi-pencil-square"></i>
+            <span>Nuevo comentario</span>
+        </button>
+    </div>
+    
+    @if (MostrarFormulario)
+    {
+        <div class="bg-white rounded-xl p-6 mb-8 shadow-lg border border-gray-100">
+            <div class="flex items-start space-x-4 mb-4">
+                <img src="https://via.placeholder.com/48" alt="Tu avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100" />
+                <div class="flex-1">
+                    <h4 class="font-semibold text-gray-900 mb-2">Comparte algo con la comunidad</h4>
+                    <textarea @bind="NuevoComentario" 
+                              placeholder="¿Qué tienes en mente?" 
+                              rows="4" 
+                              class="w-full border border-gray-300 rounded-lg p-4 resize-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"></textarea>
+                </div>
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium" 
+                        @onclick="OnCancelar">
+                    Cancelar
+                </button>
+                <button class="px-6 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-200 font-medium shadow-md" 
+                        @onclick="OnPublicar">
+                    Publicar
+                </button>
+            </div>
+        </div>
+    }
+    
+    <!-- Facebook Comments Plugin Placeholder -->
+    <div class="bg-white rounded-xl p-6 mb-8 shadow-lg border border-gray-100">
+        <div class="flex items-center space-x-3 mb-4">
+            <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <i class="bi bi-facebook text-white"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800">Comentarios de Facebook</h3>
+        </div>
+        
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+            <div class="bg-gray-50 p-4 flex justify-between items-center border-b border-gray-200">
+                <span class="flex items-center space-x-2">
+                    <i class="bi bi-chat-square-text text-gray-600"></i>
+                    <span class="font-medium">Comentarios de Facebook</span>
+                </span>
+                <span class="text-gray-500 text-sm">12 comentarios</span>
+            </div>
+            
+            <div class="p-6 text-center bg-gradient-to-br from-blue-50 to-blue-100">
+                <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="bi bi-facebook text-white text-2xl"></i>
+                </div>
+                <p class="text-gray-700 mb-4 font-medium">Inicia sesión con Facebook para comentar</p>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-md">
+                    Conectar con Facebook
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Local Comments -->
+    <div class="space-y-6">
+        @foreach (var comentario in Comentarios)
+        {
+            <ComentarioCard Comentario="comentario" 
+                           OnToggleLike="OnToggleLike" 
+                           OnResponder="OnResponder" />
+        }
+    </div>
+    
+    @if (!Comentarios.Any())
+    {
+        <div class="text-center py-12">
+            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="bi bi-chat-dots text-gray-400 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No hay comentarios aún</h3>
+            <p class="text-gray-500">¡Sé el primero en compartir algo con la comunidad!</p>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public List<Comentario> Comentarios { get; set; } = new();
+    [Parameter] public bool MostrarFormulario { get; set; }
+    [Parameter] public string NuevoComentario { get; set; } = "";
+    [Parameter] public EventCallback OnMostrarFormulario { get; set; }
+    [Parameter] public EventCallback OnCancelar { get; set; }
+    [Parameter] public EventCallback OnPublicar { get; set; }
+    [Parameter] public EventCallback<Comentario> OnToggleLike { get; set; }
+    [Parameter] public EventCallback<Comentario> OnResponder { get; set; }
+}

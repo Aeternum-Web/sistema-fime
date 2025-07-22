@@ -2,231 +2,44 @@
 
 <PageTitle>Comunidad Docente - FIME</PageTitle>
 
-<div class="max-w-7xl mx-auto p-4">
-    <div class="text-center mb-8">
-        <h1 class="text-4xl font-bold text-gray-800 mb-2"><i class="bi bi-mortarboard-fill"></i> Comunidad Docente FIME</h1>
-        <p class="text-gray-600 text-xl">Conecta con profesores, explora materias y participa en la comunidad</p>
-    </div>
-    
-    <!-- Estadísticas de la comunidad -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex items-center gap-4">
-            <div class="w-15 h-15 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
-                <i class="bi bi-person-video3"></i>
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Hero Header -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl mb-6 shadow-lg">
+                <i class="bi bi-mortarboard-fill text-white text-3xl"></i>
             </div>
-            <div>
-                <h3 class="text-sm text-gray-500 mb-1">Profesores</h3>
-                <p class="text-2xl font-bold text-blue-500 mb-0">@profesoresCount</p>
-                <span class="text-xs text-gray-400">Activos en la comunidad</span>
-            </div>
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Comunidad Docente FIME</h1>
+            <p class="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed">
+                Conecta con profesores, explora materias y participa en la comunidad académica más vibrante
+            </p>
         </div>
         
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex items-center gap-4">
-            <div class="w-15 h-15 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
-                <i class="bi bi-book"></i>
-            </div>
-            <div>
-                <h3 class="text-sm text-gray-500 mb-1">Materias</h3>
-                <p class="text-2xl font-bold text-blue-500 mb-0">@materiasCount</p>
-                <span class="text-xs text-gray-400">Disponibles</span>
-            </div>
-        </div>
+        <!-- Stats Section -->
+        <StatsSection ProfesoresCount="profesoresCount" 
+                     MateriasCount="materiasCount" 
+                     ComentariosCount="comentariosCount" 
+                     EvaluacionesCount="evaluacionesCount" />
         
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex items-center gap-4">
-            <div class="w-15 h-15 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
-                <i class="bi bi-chat-square-text"></i>
-            </div>
-            <div>
-                <h3 class="text-sm text-gray-500 mb-1">Comentarios</h3>
-                <p class="text-2xl font-bold text-blue-500 mb-0">@comentariosCount</p>
-                <span class="text-xs text-gray-400">Esta semana</span>
-            </div>
-        </div>
+        <!-- Profesores Section -->
+        <ProfesoresSection Profesores="profesores" 
+                          MostrarTodos="mostrarTodosProfesores"
+                          OnProfesorSelected="SeleccionarProfesor"
+                          OnToggleProfesores="ToggleProfesores" />
         
-        <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex items-center gap-4">
-            <div class="w-15 h-15 bg-gray-100 rounded-full flex items-center justify-center text-3xl">
-                <i class="bi bi-star"></i>
-            </div>
-            <div>
-                <h3 class="text-sm text-gray-500 mb-1">Evaluaciones</h3>
-                <p class="text-2xl font-bold text-blue-500 mb-0">@evaluacionesCount</p>
-                <span class="text-xs text-gray-400">Promedio: 4.5/5</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lista de Profesores Destacados -->
-    <div class="mb-12">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-bold text-gray-800"><i class="bi bi-award"></i> Profesores Destacados</h2>
-            <button class="text-blue-500 underline hover:text-blue-700" @onclick="ToggleProfesores">
-                @(mostrarTodosProfesores ? "Ver menos" : "Ver todos")
-            </button>
-        </div>
+        <!-- Materias Section -->
+        <MateriasSection MateriasFiltradas="materiasFiltradas" 
+                        OnFiltroChanged="FiltrarMaterias" />
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach (var profesor in (mostrarTodosProfesores ? profesores : profesores.Take(6)))
-            {
-                <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg hover:-translate-y-1 transition-all duration-200 cursor-pointer" @onclick="() => SeleccionarProfesor(profesor)">
-                    <div class="relative w-15 h-15 mb-4">
-                        <img src="@profesor.Avatar" alt="@profesor.Nombre" class="w-full h-full rounded-full object-cover" />
-                        <div class="absolute bottom-0.5 right-0.5 w-4 h-4 rounded-full border-2 border-white @(profesor.EnLinea ? "bg-green-500" : "bg-gray-400")"></div>
-                    </div>
-                    <div>
-                        <h4 class="text-xl font-semibold text-gray-800 mb-1">@profesor.Nombre</h4>
-                        <p class="text-gray-600 text-sm mb-4">@profesor.Titulo</p>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            @foreach (var materia in profesor.Materias.Take(2))
-                            {
-                                <span class="bg-blue-50 text-blue-700 px-2 py-1 rounded-xl text-xs">@materia</span>
-                            }
-                            @if (profesor.Materias.Count > 2)
-                            {
-                                <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-xl text-xs">+@(profesor.Materias.Count - 2)</span>
-                            }
-                        </div>
-                        <div class="flex items-center gap-1">
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                <span class="@(i <= profesor.Rating ? "text-yellow-400" : "text-gray-300")"><i class="bi bi-star-fill"></i></span>
-                            }
-                            <span class="text-xs text-gray-500 ml-2">(@profesor.NumeroEvaluaciones)</span>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    <!-- Materias Populares -->
-    <div class="mb-12">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-bold text-gray-800"><i class="bi bi-journal-text"></i> Materias Populares</h2>
-            <select class="px-4 py-2 border border-gray-300 rounded-lg bg-white" @onchange="FiltrarMaterias">
-                <option value="">Todas las carreras</option>
-                <option value="Ingeniería Civil">Ingeniería Civil</option>
-                <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
-                <option value="Ingeniería Industrial">Ingeniería Industrial</option>
-                <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
-            </select>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            @foreach (var materia in materiasFiltradas)
-            {
-                <div class="bg-white rounded-xl p-6 shadow-md hover:-translate-y-1 transition-transform duration-200">
-                    <div class="flex justify-between items-start mb-2">
-                        <h4 class="text-gray-800 font-semibold flex-1">@materia.Nombre</h4>
-                        <span class="bg-gray-100 text-gray-600 px-2 py-1 rounded-lg text-xs font-semibold">@materia.Codigo</span>
-                    </div>
-                    <p class="text-blue-500 font-medium mb-4">@materia.Carrera</p>
-                    <div class="mb-4 text-sm">
-                        <strong>Profesores:</strong>
-                        @string.Join(", ", materia.Profesores)
-                    </div>
-                    <div class="flex gap-4">
-                        <span class="text-xs text-gray-500"><i class="bi bi-people"></i> @materia.NumeroEstudiantes estudiantes</span>
-                        <span class="text-xs text-gray-500"><i class="bi bi-star-fill"></i> @materia.Rating.ToString("F1")</span>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-
-    <!-- Muro de Comentarios -->
-    <div class="mb-12">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-bold text-gray-800"><i class="bi bi-chat-dots"></i> Muro de la Comunidad</h2>
-            <button class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium" @onclick="MostrarFormularioComentario">
-                <i class="bi bi-pencil"></i> Nuevo comentario
-            </button>
-        </div>
-        
-        @if (mostrarFormComentario)
-        {
-            <div class="bg-white rounded-xl p-6 mb-8 shadow-md">
-                <div class="mb-4">
-                    <textarea @bind="nuevoComentario" placeholder="Comparte algo con la comunidad..." rows="3" class="w-full border border-gray-300 rounded-lg p-3 resize-y"></textarea>
-                </div>
-                <div class="flex gap-4">
-                    <button class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium" @onclick="PublicarComentario">Publicar</button>
-                    <button class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors font-medium" @onclick="CancelarComentario">Cancelar</button>
-                </div>
-            </div>
-        }
-        
-        <!-- Plugin de comentarios de Facebook -->
-        <div class="bg-white rounded-xl p-6 mb-8 shadow-md">
-            <h3 class="text-gray-800 mb-4"><i class="bi bi-facebook"></i> Comentarios de Facebook</h3>
-            <div>
-                <!-- Aquí iría el plugin de Facebook Comments -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <div class="bg-gray-50 p-4 flex justify-between border-b border-gray-200">
-                        <span><i class="bi bi-chat-square-text"></i> Comentarios de Facebook</span>
-                        <span class="text-gray-500 text-sm">12 comentarios</span>
-                    </div>
-                    <div class="p-6 text-center bg-gray-50">
-                        <p class="mb-4"><i class="bi bi-lock"></i> Inicia sesión con Facebook para comentar</p>
-                        <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">Conectar con Facebook</button>
-                    </div>
-                    <div class="p-4">
-                        <div class="flex gap-3 mb-4">
-                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div class="flex-1">
-                                <strong class="text-blue-600 text-sm">María González</strong>
-                                <p class="text-sm mt-1">Excelente iniciativa para conectar a la comunidad docente! <i class="bi bi-hand-thumbs-up"></i></p>
-                                <div class="text-xs text-gray-500 mt-2">
-                                    <span class="cursor-pointer hover:underline">Me gusta</span> · <span class="cursor-pointer hover:underline">Responder</span> · <span>2h</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex gap-3">
-                            <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
-                                <i class="bi bi-person"></i>
-                            </div>
-                            <div class="flex-1">
-                                <strong class="text-blue-600 text-sm">Dr. Roberto Martínez</strong>
-                                <p class="text-sm mt-1">¿Alguien tiene experiencia con el nuevo plan de estudios de Mecánica?</p>
-                                <div class="text-xs text-gray-500 mt-2">
-                                    <span class="cursor-pointer hover:underline">Me gusta</span> · <span class="cursor-pointer hover:underline">Responder</span> · <span>4h</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Comentarios locales -->
-        <div class="flex flex-col gap-4">
-            @foreach (var comentario in comentarios)
-            {
-                <div class="bg-white rounded-xl p-6 shadow-md">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div>
-                            <img src="@comentario.Avatar" alt="@comentario.Autor" class="w-10 h-10 rounded-full object-cover" />
-                        </div>
-                        <div>
-                            <h5 class="font-semibold text-gray-800">@comentario.Autor</h5>
-                            <span class="text-xs text-gray-500">@comentario.Fecha.ToString("dd/MM/yyyy HH:mm")</span>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <p class="leading-relaxed">@comentario.Contenido</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <button class="border border-gray-300 px-4 py-2 rounded-full text-sm hover:bg-gray-50 transition-colors @(comentario.MeGusta ? "bg-blue-50 border-blue-300 text-blue-700" : "")" @onclick="() => ToggleLike(comentario)">
-                            <i class="bi bi-hand-thumbs-up"></i> @comentario.Likes
-                        </button>
-                        <button class="border border-gray-300 px-4 py-2 rounded-full text-sm hover:bg-gray-50 transition-colors" @onclick="() => ResponderComentario(comentario)">
-                            <i class="bi bi-chat"></i> Responder
-                        </button>
-                    </div>
-                </div>
-            }
-        </div>
+        <!-- Comentarios Section -->
+        <ComentariosSection Comentarios="comentarios"
+                           MostrarFormulario="mostrarFormComentario"
+                           NuevoComentario="nuevoComentario"
+                           OnMostrarFormulario="MostrarFormularioComentario"
+                           OnCancelar="CancelarComentario"
+                           OnPublicar="PublicarComentario"
+                           OnToggleLike="ToggleLike"
+                           OnResponder="ResponderComentario" />
     </div>
 </div>
 
@@ -272,14 +85,14 @@
         // Cargar profesores
         profesores = new List<Profesor>
         {
-            new Profesor { Id = 1, Nombre = "Dr. Ana García", Titulo = "Doctora en Ingeniería Civil", Avatar = "https://via.placeholder.com/60", EnLinea = true, Rating = 5, NumeroEvaluaciones = 45, Materias = new List<string> { "Estructuras", "Concreto", "Diseño Sísmico" } },
-            new Profesor { Id = 2, Nombre = "Ing. Carlos Mendoza", Titulo = "Maestro en Ingeniería Mecánica", Avatar = "https://via.placeholder.com/60", EnLinea = false, Rating = 4, NumeroEvaluaciones = 32, Materias = new List<string> { "Termodinámica", "Mecánica de Fluidos" } },
-            new Profesor { Id = 3, Nombre = "Dra. Laura Rodríguez", Titulo = "Doctora en Ingeniería Industrial", Avatar = "https://via.placeholder.com/60", EnLinea = true, Rating = 5, NumeroEvaluaciones = 67, Materias = new List<string> { "Investigación de Operaciones", "Control de Calidad", "Lean Manufacturing" } },
-            new Profesor { Id = 4, Nombre = "Ing. Roberto Silva", Titulo = "Maestro en Ingeniería Eléctrica", Avatar = "https://via.placeholder.com/60", EnLinea = true, Rating = 4, NumeroEvaluaciones = 28, Materias = new List<string> { "Circuitos", "Electrónica", "Control Automático" } },
-            new Profesor { Id = 5, Nombre = "Dr. Patricia López", Titulo = "Doctora en Matemáticas Aplicadas", Avatar = "https://via.placeholder.com/60", EnLinea = false, Rating = 5, NumeroEvaluaciones = 89, Materias = new List<string> { "Cálculo Diferencial", "Álgebra Lineal", "Ecuaciones Diferenciales" } },
-            new Profesor { Id = 6, Nombre = "Ing. Miguel Torres", Titulo = "Maestro en Ingeniería Civil", Avatar = "https://via.placeholder.com/60", EnLinea = true, Rating = 4, NumeroEvaluaciones = 41, Materias = new List<string> { "Hidráulica", "Geotecnia" } },
-            new Profesor { Id = 7, Nombre = "Dra. Carmen Jiménez", Titulo = "Doctora en Ingeniería Química", Avatar = "https://via.placeholder.com/60", EnLinea = false, Rating = 5, NumeroEvaluaciones = 53, Materias = new List<string> { "Química Orgánica", "Procesos Industriales", "Catálisis" } },
-            new Profesor { Id = 8, Nombre = "Ing. Fernando Vega", Titulo = "Maestro en Sistemas Computacionales", Avatar = "https://via.placeholder.com/60", EnLinea = true, Rating = 4, NumeroEvaluaciones = 36, Materias = new List<string> { "Programación", "Base de Datos", "Redes" } }
+            new Profesor { Id = 1, Nombre = "Dr. Ana García", Titulo = "Doctora en Ingeniería Civil", Avatar = "https://images.unsplash.com/photo-1494790108755-2616c96d5e55?w=80&h=80&fit=crop&crop=face", EnLinea = true, Rating = 5, NumeroEvaluaciones = 45, Materias = new List<string> { "Estructuras", "Concreto", "Diseño Sísmico" } },
+            new Profesor { Id = 2, Nombre = "Ing. Carlos Mendoza", Titulo = "Maestro en Ingeniería Mecánica", Avatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face", EnLinea = false, Rating = 4, NumeroEvaluaciones = 32, Materias = new List<string> { "Termodinámica", "Mecánica de Fluidos" } },
+            new Profesor { Id = 3, Nombre = "Dra. Laura Rodríguez", Titulo = "Doctora en Ingeniería Industrial", Avatar = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face", EnLinea = true, Rating = 5, NumeroEvaluaciones = 67, Materias = new List<string> { "Investigación de Operaciones", "Control de Calidad", "Lean Manufacturing" } },
+            new Profesor { Id = 4, Nombre = "Ing. Roberto Silva", Titulo = "Maestro en Ingeniería Eléctrica", Avatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face", EnLinea = true, Rating = 4, NumeroEvaluaciones = 28, Materias = new List<string> { "Circuitos", "Electrónica", "Control Automático" } },
+            new Profesor { Id = 5, Nombre = "Dr. Patricia López", Titulo = "Doctora en Matemáticas Aplicadas", Avatar = "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face", EnLinea = false, Rating = 5, NumeroEvaluaciones = 89, Materias = new List<string> { "Cálculo Diferencial", "Álgebra Lineal", "Ecuaciones Diferenciales" } },
+            new Profesor { Id = 6, Nombre = "Ing. Miguel Torres", Titulo = "Maestro en Ingeniería Civil", Avatar = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=80&h=80&fit=crop&crop=face", EnLinea = true, Rating = 4, NumeroEvaluaciones = 41, Materias = new List<string> { "Hidráulica", "Geotecnia" } },
+            new Profesor { Id = 7, Nombre = "Dra. Carmen Jiménez", Titulo = "Doctora en Ingeniería Química", Avatar = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=80&h=80&fit=crop&crop=face", EnLinea = false, Rating = 5, NumeroEvaluaciones = 53, Materias = new List<string> { "Química Orgánica", "Procesos Industriales", "Catálisis" } },
+            new Profesor { Id = 8, Nombre = "Ing. Fernando Vega", Titulo = "Maestro en Sistemas Computacionales", Avatar = "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=80&h=80&fit=crop&crop=face", EnLinea = true, Rating = 4, NumeroEvaluaciones = 36, Materias = new List<string> { "Programación", "Base de Datos", "Redes" } }
         };
 
         // Cargar materias
@@ -298,10 +111,10 @@
         // Cargar comentarios
         comentarios = new List<Comentario>
         {
-            new Comentario { Id = 1, Autor = "Dr. Ana García", Avatar = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face", Contenido = "¡Bienvenidos al nuevo semestre! Espero que tengamos un excelente período académico lleno de aprendizaje y colaboración.", Fecha = DateTime.Now.AddHours(-2), Likes = 12, MeGusta = false },
-            new Comentario { Id = 2, Autor = "Ing. Carlos Mendoza", Avatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face", Contenido = "¿Alguien ha trabajado con el nuevo software de simulación térmica? Me gustaría intercambiar experiencias.", Fecha = DateTime.Now.AddHours(-5), Likes = 8, MeGusta = true },
-            new Comentario { Id = 3, Autor = "Dra. Laura Rodríguez", Avatar = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face", Contenido = "Compartiendo algunos recursos útiles para la optimización de procesos industriales. Los subiré al repositorio común.", Fecha = DateTime.Now.AddDays(-1), Likes = 15, MeGusta = false },
-            new Comentario { Id = 4, Autor = "Ing. Roberto Silva", Avatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face", Contenido = "Recordatorio: La conferencia sobre energías renovables es mañana a las 10:00 AM en el auditorio principal.", Fecha = DateTime.Now.AddDays(-2), Likes = 6, MeGusta = false }
+            new Comentario { Id = 1, Autor = "Dr. Ana García", Avatar = "https://images.unsplash.com/photo-1494790108755-2616c96d5e55?w=48&h=48&fit=crop&crop=face", Contenido = "¡Bienvenidos al nuevo semestre! Espero que tengamos un excelente período académico lleno de aprendizaje y colaboración.", Fecha = DateTime.Now.AddHours(-2), Likes = 12, MeGusta = false },
+            new Comentario { Id = 2, Autor = "Ing. Carlos Mendoza", Avatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&h=48&fit=crop&crop=face", Contenido = "¿Alguien ha trabajado con el nuevo software de simulación térmica? Me gustaría intercambiar experiencias.", Fecha = DateTime.Now.AddHours(-5), Likes = 8, MeGusta = true },
+            new Comentario { Id = 3, Autor = "Dra. Laura Rodríguez", Avatar = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=48&h=48&fit=crop&crop=face", Contenido = "Compartiendo algunos recursos útiles para la optimización de procesos industriales. Los subiré al repositorio común.", Fecha = DateTime.Now.AddDays(-1), Likes = 15, MeGusta = false },
+            new Comentario { Id = 4, Autor = "Ing. Roberto Silva", Avatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&h=48&fit=crop&crop=face", Contenido = "Recordatorio: La conferencia sobre energías renovables es mañana a las 10:00 AM en el auditorio principal.", Fecha = DateTime.Now.AddDays(-2), Likes = 6, MeGusta = false }
         };
     }
 
@@ -349,7 +162,7 @@
             {
                 Id = comentarios.Count + 1,
                 Autor = "Usuario Actual", // En una app real, obtener del contexto de usuario
-                Avatar = "https://via.placeholder.com/40",
+                Avatar = "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=48&h=48&fit=crop&crop=face",
                 Contenido = nuevoComentario,
                 Fecha = DateTime.Now,
                 Likes = 0,
@@ -377,38 +190,5 @@
         Console.WriteLine($"Responder a: {comentario.Autor}");
     }
 
-    // Clases de modelo
-    public class Profesor
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; } = "";
-        public string Titulo { get; set; } = "";
-        public string Avatar { get; set; } = "";
-        public bool EnLinea { get; set; }
-        public int Rating { get; set; }
-        public int NumeroEvaluaciones { get; set; }
-        public List<string> Materias { get; set; } = new();
-    }
 
-    public class Materia
-    {
-        public int Id { get; set; }
-        public string Nombre { get; set; } = "";
-        public string Codigo { get; set; } = "";
-        public string Carrera { get; set; } = "";
-        public List<string> Profesores { get; set; } = new();
-        public int NumeroEstudiantes { get; set; }
-        public decimal Rating { get; set; }
-    }
-
-    public class Comentario
-    {
-        public int Id { get; set; }
-        public string Autor { get; set; } = "";
-        public string Avatar { get; set; } = "";
-        public string Contenido { get; set; } = "";
-        public DateTime Fecha { get; set; }
-        public int Likes { get; set; }
-        public bool MeGusta { get; set; }
-    }
 }
