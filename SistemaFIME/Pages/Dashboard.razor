@@ -16,30 +16,346 @@
         </div>
         
         <!-- Stats Section -->
-        <StatsSection ProfesoresCount="profesoresCount" 
-                     MateriasCount="materiasCount" 
-                     ComentariosCount="comentariosCount" 
-                     EvaluacionesCount="evaluacionesCount" />
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-md">
+                            <i class="bi bi-person-video3 text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Profesores</h3>
+                            <p class="text-3xl font-bold text-blue-600 mt-1">@profesoresCount</p>
+                            <span class="text-xs text-gray-400 mt-1">Activos en la comunidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-md">
+                            <i class="bi bi-book text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Materias</h3>
+                            <p class="text-3xl font-bold text-green-600 mt-1">@materiasCount</p>
+                            <span class="text-xs text-gray-400 mt-1">Disponibles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center shadow-md">
+                            <i class="bi bi-chat-square-text text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Comentarios</h3>
+                            <p class="text-3xl font-bold text-purple-600 mt-1">@comentariosCount</p>
+                            <span class="text-xs text-gray-400 mt-1">Esta semana</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-md">
+                            <i class="bi bi-star-fill text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wide">Evaluaciones</h3>
+                            <p class="text-3xl font-bold text-yellow-600 mt-1">@evaluacionesCount</p>
+                            <span class="text-xs text-gray-400 mt-1">Promedio: 4.5/5</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <!-- Profesores Section -->
-        <ProfesoresSection Profesores="profesores" 
-                          MostrarTodos="mostrarTodosProfesores"
-                          OnProfesorSelected="SeleccionarProfesor"
-                          OnToggleProfesores="ToggleProfesores" />
-        
+        <div class="mb-12">
+            <div class="flex justify-between items-center mb-8">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg flex items-center justify-center">
+                        <i class="bi bi-award text-white text-lg"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Profesores Destacados</h2>
+                </div>
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors font-medium shadow-md hover:shadow-lg flex items-center space-x-2" 
+                        @onclick="ToggleProfesores">
+                    <i class="bi @(mostrarTodosProfesores ? "bi-eye-slash" : "bi-eye")"></i>
+                    <span>@(mostrarTodosProfesores ? "Ver menos" : "Ver todos")</span>
+                </button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                @foreach (var profesor in (mostrarTodosProfesores ? profesores : profesores.Take(8)))
+                {
+                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer border border-gray-100 group" 
+                         @onclick="() => SeleccionarProfesor(profesor)">
+                        
+                        <div class="flex flex-col items-center text-center">
+                            <!-- Avatar with online status -->
+                            <div class="relative mb-4">
+                                <div class="w-20 h-20 rounded-full overflow-hidden ring-4 ring-gray-100 group-hover:ring-blue-200 transition-all duration-300">
+                                    <img src="@profesor.Avatar" alt="@profesor.Nombre" class="w-full h-full object-cover" />
+                                </div>
+                                <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-3 border-white @(profesor.EnLinea ? "bg-green-500" : "bg-gray-400") shadow-md"></div>
+                            </div>
+                            
+                            <!-- Profesor Info -->
+                            <div class="w-full">
+                                <h4 class="text-xl font-bold text-gray-800 mb-1 group-hover:text-blue-600 transition-colors">@profesor.Nombre</h4>
+                                <p class="text-gray-600 text-sm mb-4 font-medium">@profesor.Titulo</p>
+                                
+                                <!-- Materias Tags -->
+                                <div class="flex flex-wrap justify-center gap-2 mb-4">
+                                    @foreach (var materia in profesor.Materias.Take(2))
+                                    {
+                                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium border border-blue-200">
+                                            @materia
+                                        </span>
+                                    }
+                                    @if (profesor.Materias.Count > 2)
+                                    {
+                                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium border border-gray-200">
+                                            +@(profesor.Materias.Count - 2) más
+                                        </span>
+                                    }
+                                </div>
+                                
+                                <!-- Rating -->
+                                <div class="flex items-center justify-center gap-1">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        <i class="@(i <= profesor.Rating ? "bi bi-star-fill text-yellow-400" : "bi bi-star text-gray-300") text-sm"></i>
+                                    }
+                                    <span class="text-xs text-gray-500 ml-2 font-medium">(@profesor.NumeroEvaluaciones)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            @if (!mostrarTodosProfesores && profesores.Count > 8)
+            {
+                <div class="text-center mt-8">
+                    <p class="text-gray-500 text-sm">Mostrando 8 de @profesores.Count profesores</p>
+                </div>
+            }
+        </div>
+
         <!-- Materias Section -->
-        <MateriasSection MateriasFiltradas="materiasFiltradas" 
-                        OnFiltroChanged="FiltrarMaterias" />
-        
+        <div class="mb-12">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                        <i class="bi bi-journal-text text-white text-lg"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Materias Populares</h2>
+                </div>
+                
+                <div class="flex items-center space-x-3">
+                    <label class="text-sm font-medium text-gray-700">Filtrar por carrera:</label>
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors" 
+                            @onchange="FiltrarMaterias">
+                        <option value="">Todas las carreras</option>
+                        <option value="Ingeniería Civil">Ingeniería Civil</option>
+                        <option value="Ingeniería Mecánica">Ingeniería Mecánica</option>
+                        <option value="Ingeniería Industrial">Ingeniería Industrial</option>
+                        <option value="Ingeniería Eléctrica">Ingeniería Eléctrica</option>
+                    </select>
+                </div>
+            </div>
+            
+            @if (materiasFiltradas.Any())
+            {
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    @foreach (var materia in materiasFiltradas)
+                    {
+                        <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-2">
+                                        <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                                            <i class="bi bi-journal-text text-white text-sm"></i>
+                                        </div>
+                                        <h4 class="text-lg font-bold text-gray-800 group-hover:text-indigo-600 transition-colors">@materia.Nombre</h4>
+                                    </div>
+                                    <span class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold border border-indigo-200">
+                                        @materia.Codigo
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <p class="text-blue-600 font-semibold mb-3 flex items-center">
+                                    <i class="bi bi-mortarboard mr-2"></i>
+                                    @materia.Carrera
+                                </p>
+                                
+                                <div class="mb-4">
+                                    <p class="text-sm font-medium text-gray-700 mb-2">
+                                        <i class="bi bi-person-check mr-1"></i>
+                                        Profesores:
+                                    </p>
+                                    <div class="flex flex-wrap gap-1">
+                                        @foreach (var profesor in materia.Profesores)
+                                        {
+                                            <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-md text-xs font-medium">
+                                                @profesor
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                                <div class="flex items-center space-x-4">
+                                    <span class="text-xs text-gray-600 flex items-center">
+                                        <i class="bi bi-people-fill mr-1 text-green-500"></i> 
+                                        @materia.NumeroEstudiantes
+                                    </span>
+                                    <span class="text-xs text-gray-600 flex items-center">
+                                        <i class="bi bi-star-fill mr-1 text-yellow-500"></i> 
+                                        @materia.Rating.ToString("F1")
+                                    </span>
+                                </div>
+                                <button class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition-colors">
+                                    Ver detalles <i class="bi bi-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-search text-gray-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No se encontraron materias</h3>
+                    <p class="text-gray-500">Intenta con un filtro diferente</p>
+                </div>
+            }
+        </div>
+
         <!-- Comentarios Section -->
-        <ComentariosSection Comentarios="comentarios"
-                           MostrarFormulario="mostrarFormComentario"
-                           NuevoComentario="nuevoComentario"
-                           OnMostrarFormulario="MostrarFormularioComentario"
-                           OnCancelar="CancelarComentario"
-                           OnPublicar="PublicarComentario"
-                           OnToggleLike="ToggleLike"
-                           OnResponder="ResponderComentario" />
+        <div class="mb-12">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 space-y-4 sm:space-y-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="bi bi-chat-dots text-white text-lg"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Muro de la Comunidad</h2>
+                </div>
+                
+                <button class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-3 rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center space-x-2" 
+                        @onclick="MostrarFormularioComentario">
+                    <i class="bi bi-pencil-square"></i>
+                    <span>Nuevo comentario</span>
+                </button>
+            </div>
+            
+            @if (mostrarFormComentario)
+            {
+                <div class="bg-white rounded-xl p-6 mb-8 shadow-lg border border-gray-100">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <img src="https://via.placeholder.com/48" alt="Tu avatar" class="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100" />
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900 mb-2">Comparte algo con la comunidad</h4>
+                            <textarea @bind="nuevoComentario" 
+                                      placeholder="¿Qué tienes en mente?" 
+                                      rows="4" 
+                                      class="w-full border border-gray-300 rounded-lg p-4 resize-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3">
+                        <button class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium" 
+                                @onclick="CancelarComentario">
+                            Cancelar
+                        </button>
+                        <button class="px-6 py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-purple-700 transition-all duration-200 font-medium shadow-md" 
+                                @onclick="PublicarComentario">
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+            }
+            
+            <!-- Local Comments -->
+            <div class="space-y-6">
+                @foreach (var comentario in comentarios)
+                {
+                    <div class="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="flex-shrink-0">
+                                <img src="@comentario.Avatar" alt="@comentario.Autor" class="w-12 h-12 rounded-full object-cover ring-2 ring-gray-100" />
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between">
+                                    <h5 class="font-bold text-gray-900">@comentario.Autor</h5>
+                                    <span class="text-xs text-gray-500 flex items-center">
+                                        <i class="bi bi-clock mr-1"></i>
+                                        @GetTiempoTranscurrido(comentario.Fecha)
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 font-medium">Profesor FIME</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <p class="text-gray-800 leading-relaxed">@comentario.Contenido</p>
+                        </div>
+                        
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                            <div class="flex items-center space-x-4">
+                                <button class="flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 @(comentario.MeGusta ? "bg-blue-50 border-blue-200 text-blue-700 border" : "border border-gray-300 text-gray-600 hover:bg-gray-50")" 
+                                        @onclick="() => ToggleLike(comentario)">
+                                    <i class="bi @(comentario.MeGusta ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up")"></i>
+                                    <span>@comentario.Likes</span>
+                                </button>
+                                
+                                <button class="flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium border border-gray-300 text-gray-600 hover:bg-gray-50 transition-all duration-200" 
+                                        @onclick="() => ResponderComentario(comentario)">
+                                    <i class="bi bi-chat"></i>
+                                    <span>Responder</span>
+                                </button>
+                            </div>
+                            
+                            <div class="flex items-center space-x-2">
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                                    <i class="bi bi-share"></i>
+                                </button>
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                                    <i class="bi bi-bookmark"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            @if (!comentarios.Any())
+            {
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="bi bi-chat-dots text-gray-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No hay comentarios aún</h3>
+                    <p class="text-gray-500">¡Sé el primero en compartir algo con la comunidad!</p>
+                </div>
+            }
+        </div>
     </div>
 </div>
 
@@ -190,5 +506,13 @@
         Console.WriteLine($"Responder a: {comentario.Autor}");
     }
 
-
+    private string GetTiempoTranscurrido(DateTime fecha)
+    {
+        var tiempo = DateTime.Now - fecha;
+        if (tiempo.TotalMinutes < 60)
+            return $"{(int)tiempo.TotalMinutes}m";
+        if (tiempo.TotalHours < 24)
+            return $"{(int)tiempo.TotalHours}h";
+        return $"{(int)tiempo.TotalDays}d";
+    }
 }
